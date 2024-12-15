@@ -97,8 +97,9 @@ $html = '
 ';
 
 // Agregar los productos y sus adiciones al contenido
+$contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
-    $html .= '<li><strong>Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '<ul>';
+    $html .= '<li><strong>' . $contador++ . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '<ul>';
     
     // Consultar las adiciones asociadas al producto actual
     $producto_id = $producto['id'];

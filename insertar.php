@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
     $productos = isset($_POST['productos']) ? $_POST['productos'] : [];
-    $cantidades = isset($_POST['cantidad']) ? $_POST['cantidad'] : [];
     $adiciones = isset($_POST['adiciones']) ? $_POST['adiciones'] : [];
     $metodopago = $_POST['metodopago'];
     $domicilio = $_POST['domicilio'];
@@ -24,9 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insertar los productos asociados al cliente
         foreach ($productos as $index => $producto) {
-            $cantidad = isset($cantidades[$index]) ? $cantidades[$index] : 1; // Default cantidad a 1 si no está definida
-            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto, cantidad) 
-                             VALUES ('$usuario_id', '$producto', '$cantidad')";
+            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto) 
+                             VALUES ('$usuario_id', '$producto')";
             if ($conexion->query($sql_producto) === TRUE) {
                 $producto_id = $conexion->insert_id;
 
