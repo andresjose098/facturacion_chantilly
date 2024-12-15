@@ -2,8 +2,27 @@
 include('conexion.php');
 include('header.php');
 
-// Obtener todos los usuarios registrados
-$sql = "SELECT * FROM clientes";
+// Obtener la página actual desde la URL, por defecto será la página 1
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1;
+
+// Número de usuarios por página
+$usuariosPorPagina = 4;
+
+// Calcular el OFFSET para la consulta SQL
+$offset = ($page - 1) * $usuariosPorPagina;
+
+// Contar el total de usuarios en la tabla
+$totalUsuariosQuery = "SELECT COUNT(*) AS total FROM clientes";
+$totalUsuariosResult = $conexion->query($totalUsuariosQuery);
+$totalUsuariosRow = $totalUsuariosResult->fetch_assoc();
+$totalUsuarios = $totalUsuariosRow['total'];
+
+// Calcular el número total de páginas
+$totalPaginas = ceil($totalUsuarios / $usuariosPorPagina);
+
+// Obtener los usuarios para la página actual, ordenados por los más recientes primero
+$sql = "SELECT * FROM clientes ORDER BY id DESC LIMIT $usuariosPorPagina OFFSET $offset";
 $result = $conexion->query($sql);
 ?>
 
@@ -108,7 +127,26 @@ $result = $conexion->query($sql);
         <?php endwhile; ?>
     </tbody>
 </table>
+<!-- Navegación de Paginación -->
+<div style="margin-top: 20px;">
+    <ul style="list-style: none; display: flex; gap: 10px; justify-content: center;">
+        <?php if ($page > 1): ?>
+            <li><a href="?page=<?= $page - 1 ?>" class="btn btn-secondary">Anterior</a></li>
+        <?php endif; ?>
 
+        <?php for ($i = 1; $i <= $totalPaginas; $i++): ?>
+            <li>
+                <a href="?page=<?= $i ?>" class="btn <?= $i == $page ? 'btn-primary' : 'btn-secondary' ?>">
+                    <?= $i ?>
+                </a>
+            </li>
+        <?php endfor; ?>
+
+        <?php if ($page < $totalPaginas): ?>
+            <li><a href="?page=<?= $page + 1 ?>" class="btn btn-secondary">Siguiente</a></li>
+        <?php endif; ?>
+    </ul>
+</div>
 
 <!-- Formulario para insertar nuevos usuarios -->
 <h2>Registrar Nuevo Usuario</h2>

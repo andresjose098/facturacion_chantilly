@@ -54,7 +54,7 @@ $pdf->SetFont('helvetica', '', 12);
 $html = '
     <h2>Chantilly Pastelería Artesanal</h2>
     <h1>Registro de Usuario</h1>
-    <strong> Nombre:</strong> ' . htmlspecialchars($nombre) . '<br>
+    <strong>Nombre:</strong> ' . htmlspecialchars($nombre) . '<br>
     <strong>Dirección:</strong> ' . htmlspecialchars($direccion) . '<br>
     <strong>Teléfono:</strong> ' . htmlspecialchars($telefono) . '<br>
     <strong>Método de Pago:</strong> ' . htmlspecialchars($metodopago) . '<br>
@@ -67,7 +67,7 @@ $html = '
 
 // Agregar los productos y sus adiciones al contenido
 while ($producto = $result_productos->fetch_assoc()) {
-    $html .= '<li><strong>Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '<br>';
+    $html .= '<li><strong>Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '<ul>';
     
     // Consultar las adiciones asociadas al producto actual
     $producto_id = $producto['id'];
@@ -77,19 +77,16 @@ while ($producto = $result_productos->fetch_assoc()) {
     $stmt_adiciones->execute();
     $result_adiciones = $stmt_adiciones->get_result();
 
-    // Agregar las adiciones al producto
+    // Agregar las adiciones como sub-lista
     if ($result_adiciones->num_rows > 0) {
-        $html .= '<strong>Adiciones:</strong> ';
-        $adiciones = [];
         while ($adicion = $result_adiciones->fetch_assoc()) {
-            $adiciones[] = htmlspecialchars($adicion['nombre_adicion']);
+            $html .= '<li>' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
         }
-        $html .= implode(", ", $adiciones);
     } else {
-        $html .= '<strong>Adiciones:</strong> Ninguna';
+        $html .= '<li>Ninguna</li>';
     }
 
-    $html .= '</li><br>';
+    $html .= '</ul></li><br>';
 }
 
 $html .= '
@@ -97,7 +94,7 @@ $html .= '
     <hr>
     <p><strong>Gracias por confiar en nosotros!</strong></p>
     <p>UrbanSoft empresa dedicada al desarrollo del software!</p>
-     <p>Whatsapp 3165155249</p>
+    <p>Whatsapp 3165155249</p>
 ';
 
 // Escribir el HTML en el PDF
