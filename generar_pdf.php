@@ -61,7 +61,7 @@ $html = '
     <strong>Método de Pago:</strong> ' . htmlspecialchars($metodopago) . '<br>
     <strong>Domicilio:</strong> ' . htmlspecialchars($domicilio) . '<br>
     <strong>Valor Total:</strong> ' . htmlspecialchars($valortotal) . '<br>
-    <strong>Pago:</strong> ' . htmlspecialchars($cambio) . '<br>
+    <strong>Paga:</strong> ' . htmlspecialchars($cambio) . '<br>
     <hr>
     <h2>Productos y Adiciones:</h2>
     <ul>

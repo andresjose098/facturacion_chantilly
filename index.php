@@ -254,8 +254,8 @@ $result = $conexion->query($sql);
     </div>
 
     <div class="form-group">
-        <label for="direccion">Pago:</label>
-        <input type="text" class="form-control" id="cambio" name="cambio" placeholder="Ingrese el valor del cambio a devolver " required>
+        <label for="direccion">Paga:</label>
+        <input type="text" class="form-control" id="cambio" name="cambio" placeholder="Ingrese el valor del pago " required>
     </div>
 
     
