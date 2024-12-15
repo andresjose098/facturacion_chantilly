@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-12-2024 a las 11:02:43
+-- Tiempo de generación: 15-12-2024 a las 16:03:11
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.0.30
 
@@ -45,7 +45,16 @@ INSERT INTO `adiciones` (`id`, `producto_id`, `nombre_adicion`) VALUES
 (8, 35, 'Chispas de chocolate'),
 (9, 35, 'Fresa'),
 (10, 35, 'Fresa'),
-(11, 35, 'Fresa');
+(11, 35, 'Fresa'),
+(12, 36, 'Crema Chantilly'),
+(13, 37, 'Chispas de chocolate'),
+(14, 37, 'Fresa'),
+(15, 38, 'Arequipe'),
+(16, 39, 'Chispas de chocolate'),
+(17, 39, 'Crema Chantilly'),
+(18, 39, 'Lechera'),
+(19, 39, 'Lechera'),
+(20, 40, 'Arequipe');
 
 -- --------------------------------------------------------
 
@@ -61,16 +70,20 @@ CREATE TABLE `clientes` (
   `producto` varchar(100) NOT NULL,
   `metodopago` varchar(100) NOT NULL,
   `domicilio` varchar(100) NOT NULL,
-  `valortotal` varchar(100) NOT NULL
+  `valortotal` varchar(100) NOT NULL,
+  `cambio` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `clientes`
 --
 
-INSERT INTO `clientes` (`id`, `nombre`, `direccion`, `telefono`, `producto`, `metodopago`, `domicilio`, `valortotal`) VALUES
-(37, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'Nequi', '$10.000', '150000'),
-(38, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'DaviPlata', '$4.000', '150000');
+INSERT INTO `clientes` (`id`, `nombre`, `direccion`, `telefono`, `producto`, `metodopago`, `domicilio`, `valortotal`, `cambio`) VALUES
+(37, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'Nequi', '$10.000', '150000', ''),
+(38, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'DaviPlata', '$4.000', '150000', ''),
+(39, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'Nequi', '$4.000', '30000', ''),
+(40, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'Nequi', '$4.000', '30000', ''),
+(41, 'jorge alban', 'carrera 18 sur #8-16', '3185212067', '', 'Nequi', '$4.000', '150000', '200000');
 
 -- --------------------------------------------------------
 
@@ -92,7 +105,12 @@ INSERT INTO `productos` (`id`, `usuario_id`, `nombre_producto`) VALUES
 (32, 37, 'Merengon Guanabana'),
 (33, 37, 'Merengon Guanabana'),
 (34, 38, 'Merengon mixto'),
-(35, 38, 'Merengon fresa y durazno');
+(35, 38, 'Merengon fresa y durazno'),
+(36, 39, 'Merengon Guanabana'),
+(37, 39, 'Merengon Guanabana'),
+(38, 40, 'Merengon fresa'),
+(39, 40, 'Merengon Oreo'),
+(40, 41, 'Merengon mixto');
 
 --
 -- Índices para tablas volcadas
@@ -126,19 +144,19 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `adiciones`
 --
 ALTER TABLE `adiciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Restricciones para tablas volcadas
