@@ -189,7 +189,7 @@ $result = $conexion->query($sql);
                 <option value="Merengon M&M">Merengon M&M</option>
                 <option value="Merengon Milo">Merengon Milo</option>
                 <option value="Merengon Fresas con crema">Fresas con crema</option>
-                <option value="Merengon Fresas con crema">Porcion de torta</option>
+                <option value="Porcion torta">Porcion de torta</option>
             </select>
         </div>
 

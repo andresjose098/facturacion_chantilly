@@ -92,14 +92,16 @@ $html = '
         </tr>
     </table>
     <hr>
-    <h2>Productos y Adiciones:</h2>
-    <ul>
+    <h2 style="text-align: left;">Productos y Adiciones:</h2>
+    <ul style="text-align: left; list-style-type: none; padding-left: 0;">
 ';
 
 // Agregar los productos y sus adiciones al contenido
 $contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
-    $html .= '<li><strong>' . $contador++ . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '<ul>';
+    $html .= '<li style="margin-bottom: 10px;">
+                <strong>' . $contador++ . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
+                <ul style="list-style-type: disc; padding-left: 10px; text-align: left;">';
     
     // Consultar las adiciones asociadas al producto actual
     $producto_id = $producto['id'];
@@ -118,7 +120,8 @@ while ($producto = $result_productos->fetch_assoc()) {
         $html .= '<li>Ninguna</li>';
     }
 
-    $html .= '</ul></li><br>';
+    $html .= '</ul>
+              </li>';
 }
 
 $html .= '
@@ -128,7 +131,7 @@ $html .= '
     <p>UrbanSoft empresa dedicada</p> 
     <p>al desarrollo del software!</p>
     <p>Whatsapp 3165155249</p>
-     <Strong>Feliz navidad</Strong>
+     <strong>Feliz navidad</strong>
 ';
 
 // Escribir el HTML en el PDF
@@ -136,4 +139,4 @@ $pdf->writeHTML($html);
 
 // Generar el PDF y mostrarlo en el navegador
 $pdf->Output('registro_usuario_' . $id . '.pdf', 'I');  // 'I' indica que se abrirá en el navegador
-?>
+
