@@ -21,12 +21,13 @@ if (isset($_GET['id'])) {
     // Procesar la edición del usuario
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $nombre = $_POST['nombre'];
+        $barrio=$_POST['barrio'];
         $direccion = $_POST['direccion'];
         $telefono = $_POST['telefono'];
 
-        $sql_update = "UPDATE clientes SET nombre = ?, direccion = ?, telefono = ? WHERE id = ?";
+        $sql_update = "UPDATE clientes SET nombre = ?,barrio =?, direccion = ?, telefono = ? WHERE id = ?";
         $stmt_update = $conexion->prepare($sql_update);
-        $stmt_update->bind_param("sssi", $nombre, $direccion, $telefono, $id);
+        $stmt_update->bind_param("sssi", $nombre,$barrio, $direccion, $telefono, $id);
 
         if ($stmt_update->execute()) {
             header("Location: index.php");
@@ -54,17 +55,24 @@ if (isset($_GET['id'])) {
     background-attachment: fixed;
     padding:40px;">
     <h1>Editar Usuario</h1>
-    <form action="" method="POST">
-        <label for="nombre">Nombre:</label>
-        <input type="text" name="nombre" value="<?= $usuario['nombre'] ?>" required>
-        <br>
-        <label for="direccion">Dirección:</label>
-        <input type="text" name="direccion" value="<?= $usuario['direccion'] ?>" required>
-        <br>
+    <form action="insertar.php" method="POST">
+    <div class="form-group">
         <label for="telefono">Teléfono:</label>
-        <input type="text" name="telefono" value="<?= $usuario['telefono'] ?>" required>
-        <br>
-        <button type="submit">Actualizar</button>
+        <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el teléfono" required>
+    </div>
+    <div class="form-group">
+        <label for="nombre">Nombre:</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
+    </div>
+    <div class="form-group">
+        <label for="barrio">Barrio:</label>
+        <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Ingrese el barrio" required>
+    </div>
+    <div class="form-group">
+        <label for="direccion">Dirección:</label>
+        <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección" required>
+    </div>
+        <button type="submit" class="btn btn-primary">Actualizar</button>
     </form>
 </body>
 </html>

@@ -54,17 +54,43 @@ $pdf->SetFont('helvetica', '', 12);
 
 // Crear contenido del PDF (HTML)
 $html = '
-    <h2>Chantilly Pastelería Artesanal</h2>
-        whatsapp 3185212067
-    <h1>Registro de Usuario</h1>
-    <strong>Nombre:</strong> ' . htmlspecialchars($nombre) . '<br>
-    <strong>Barrio:</strong> ' . htmlspecialchars($barrio) . '<br>
-    <strong>Dirección:</strong> ' . htmlspecialchars($direccion) . '<br>
-    <strong>Teléfono:</strong> ' . htmlspecialchars($telefono) . '<br>
-    <strong>Método de Pago:</strong> ' . htmlspecialchars($metodopago) . '<br>
-    <strong>Domicilio:</strong> ' . htmlspecialchars($domicilio) . '<br>
-    <strong>Valor Total:</strong> ' . htmlspecialchars($valortotal) . '<br>
-    <strong>Paga:</strong> ' . htmlspecialchars($cambio) . '<br>
+   <h2 style="text-align: left;">Chantilly Pastelería Artesanal</h2>
+    <p style="text-align: left;">Whatsapp 3185212067</p>
+    <h1 style="text-align: left;">Registro de Usuario</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <tr>
+            <td style="width: 20%;"><strong>Nombre:</strong></td>
+            <td style="width: 60%;">' . htmlspecialchars($nombre) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Dirección:</strong></td>
+            <td>' . htmlspecialchars($direccion) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Barrio:</strong></td>
+            <td>' . htmlspecialchars($barrio) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Teléfono:</strong></td>
+            <td>' . htmlspecialchars($telefono) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Método de Pago:</strong></td>
+            <td>' . htmlspecialchars($metodopago) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Domicilio:</strong></td>
+            <td>' . htmlspecialchars($domicilio) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Valor Total:</strong></td>
+            <td>' . htmlspecialchars($valortotal) . '</td>
+        </tr>
+        <tr>
+            <td><strong>Paga:</strong></td>
+            <td>' . htmlspecialchars($cambio) . '</td>
+        </tr>
+    </table>
     <hr>
     <h2>Productos y Adiciones:</h2>
     <ul>
@@ -101,6 +127,7 @@ $html .= '
     <p>UrbanSoft empresa dedicada</p> 
     <p>al desarrollo del software!</p>
     <p>Whatsapp 3165155249</p>
+     <Strong>Feliz navidad</Strong>
 ';
 
 // Escribir el HTML en el PDF

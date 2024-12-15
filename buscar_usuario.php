@@ -6,7 +6,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['telefono'])) {
     $telefono = $_POST['telefono'];
 
     // Consultar los datos del usuario por teléfono
-    $sql = "SELECT nombre, direccion FROM clientes WHERE telefono = ?";
+    $sql = "SELECT nombre, direccion, barrio FROM clientes WHERE telefono = ?";
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("s", $telefono);
     $stmt->execute();

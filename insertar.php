@@ -7,46 +7,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $barrio = $_POST['barrio'];
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
-    $productos = isset($_POST['productos']) ? $_POST['productos'] : [];  // Asegurarse de que productos[] exista
-    $adiciones = isset($_POST['adiciones']) ? $_POST['adiciones'] : [];  // Asegurarse de que adiciones[] exista
+    $productos = isset($_POST['productos']) ? $_POST['productos'] : [];
+    $cantidades = isset($_POST['cantidad']) ? $_POST['cantidad'] : [];
+    $adiciones = isset($_POST['adiciones']) ? $_POST['adiciones'] : [];
     $metodopago = $_POST['metodopago'];
     $domicilio = $_POST['domicilio'];
     $valortotal = $_POST['valortotal'];
-    $cambio =$_POST['cambio'];
-    // Insertar el cliente en la tabla 'clientes'
-    $sql_cliente = "INSERT INTO clientes (nombre,barrio, direccion, telefono, metodopago, domicilio, valortotal,cambio) 
-                    VALUES ('$nombre','$barrio','$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal','$cambio')";
+    $cambio = $_POST['cambio'];
 
+    // Insertar el cliente en la tabla 'clientes'
+    $sql_cliente = "INSERT INTO clientes (nombre, barrio, direccion, telefono, metodopago, domicilio, valortotal, cambio) 
+                    VALUES ('$nombre', '$barrio', '$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal', '$cambio')";
     if ($conexion->query($sql_cliente) === TRUE) {
         // Obtener el último ID insertado del cliente
         $usuario_id = $conexion->insert_id;
 
-        // Insertar los productos y sus adiciones asociados al cliente
+        // Insertar los productos asociados al cliente
         foreach ($productos as $index => $producto) {
-            $producto = $conexion->real_escape_string($producto);  // Prevenir inyección SQL
-            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto) VALUES ('$usuario_id', '$producto')";
-
+            $cantidad = isset($cantidades[$index]) ? $cantidades[$index] : 1; // Default cantidad a 1 si no está definida
+            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto, cantidad) 
+                             VALUES ('$usuario_id', '$producto', '$cantidad')";
             if ($conexion->query($sql_producto) === TRUE) {
-                // Obtener el último ID insertado del producto
                 $producto_id = $conexion->insert_id;
 
-                // Insertar las adiciones relacionadas con el producto actual
-                if (isset($adiciones[$index]) && is_array($adiciones[$index])) {
+                // Insertar las adiciones asociadas al producto
+                if (isset($adiciones[$index])) {
                     foreach ($adiciones[$index] as $adicion) {
-                        $adicion = $conexion->real_escape_string($adicion);  // Prevenir inyección SQL
-                        $sql_adicion = "INSERT INTO adiciones (producto_id, nombre_adicion) VALUES ('$producto_id', '$adicion')";
-
-                        if (!$conexion->query($sql_adicion)) {
-                            echo "Error al insertar la adición: " . $conexion->error;
-                        }
+                        $sql_adicion = "INSERT INTO adiciones (producto_id, nombre_adicion) 
+                                        VALUES ('$producto_id', '$adicion')";
+                        $conexion->query($sql_adicion);
                     }
                 }
-            } else {
-                echo "Error al insertar el producto: " . $conexion->error;
             }
         }
 
-        // Redirigir a index.php después de la inserción
+        // Redirigir al index.php después de la inserción
         header("Location: index.php");
         exit();
     } else {

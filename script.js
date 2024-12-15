@@ -84,41 +84,43 @@ function eliminarAdicion(btn) {
 }
 
 
+// Buscar usuario por número de teléfono
+$(document).ready(function () {
+    $('#telefono').on('keyup', function () {
+        var telefono = $(this).val(); // Obtener el valor del teléfono ingresado
 
-        // Buscar usuario por número de teléfono
-        $(document).ready(function () {
-            $('#telefono').on('keyup', function () {
-                var telefono = $(this).val(); // Obtener el valor del teléfono ingresado
-
-                // Verificar si el campo no está vacío y tiene al menos 10 caracteres
-                if (telefono.length >= 10) {
-                    $.ajax({
-                        url: 'buscar_usuario.php', // Archivo PHP para buscar datos
-                        method: 'POST',
-                        data: { telefono: telefono },
-                        dataType: 'json',
-                        success: function (response) {
-                            if (response.status === 'success') {
-                                // Rellenar los campos con los datos obtenidos
-                                $('#nombre').val(response.data.nombre);
-                                $('#direccion').val(response.data.direccion);
-                                $('#barrio').val(response.data.barrio);
-                            } else {
-                                // Limpiar los campos si el usuario no es encontrado
-                                $('#nombre').val('');
-                                $('#direccion').val('');
-                                $('#barrio').val('');
-                            }
-                        },
-                        error: function () {
-                            alert('Error al buscar el usuario.');
-                        }
-                    });
-                } else {
-                    // Limpiar los campos si no se cumple la longitud mínima
-                    $('#nombre').val('');
-                    $('#direccion').val('');
-                    $('#barrio').val('');
+        // Verificar si el campo no está vacío y tiene al menos 10 caracteres
+        if (telefono.length >= 10) {
+            $.ajax({
+                url: 'buscar_usuario.php', // Archivo PHP para buscar datos
+                method: 'POST',           // Método de solicitud
+                data: { telefono: telefono }, // Datos enviados al servidor
+                dataType: 'json',         // Esperar una respuesta en formato JSON
+                success: function (response) {
+                    if (response.status === 'success') {
+                        // Rellenar los campos con los datos obtenidos
+                        $('#nombre').val(response.data.nombre || '');
+                        $('#direccion').val(response.data.direccion || '');
+                        $('#barrio').val(response.data.barrio || '');
+                    } else {
+                        // Limpiar los campos si el usuario no es encontrado
+                        $('#nombre').val('');
+                        $('#direccion').val('');
+                        $('#barrio').val('');
+                        alert('Usuario no encontrado.');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    // Manejar errores en la solicitud AJAX
+                    console.error('Error al buscar el usuario:', error);
+                    alert('Hubo un error al buscar el usuario. Por favor, intenta de nuevo.');
                 }
             });
-        });
+        } else {
+            // Limpiar los campos si el teléfono no cumple con la longitud mínima
+            $('#nombre').val('');
+            $('#direccion').val('');
+            $('#barrio').val('');
+        }
+    });
+});
