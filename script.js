@@ -34,6 +34,8 @@ function agregarProducto() {
                 <option value="Chocolate">Chocolate</option>
                 <option value="Chispas de chocolate">Chispas de chocolate</option>
                 <option value="Crema Chantilly">Crema Chantilly</option>
+                <option value="M&M">M&M</option>
+                <option value="Milo">Milo</option>
             </select>
         </div>
         <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this)">Agregar Adición</button>
@@ -60,6 +62,8 @@ function agregarAdicion(btn) {
         <option value="Chocolate">Chocolate</option>
         <option value="Chispas de chocolate">Chispas de chocolate</option>
         <option value="Crema Chantilly">Crema Chantilly</option>
+        <option value="M&M">M&M</option>
+        <option value="Milo">Milo</option>
     `;
     adicionesDiv.appendChild(nuevaAdicion);
 }

@@ -25,6 +25,7 @@ $telefono = $usuario['telefono'];
 $metodopago = $usuario['metodopago'];
 $domicilio = $usuario['domicilio'];
 $valortotal = $usuario['valortotal'];
+$cambio=$usuario['cambio'];
 
 // Consultar los productos asociados al cliente
 $sql_productos = "SELECT * FROM productos WHERE usuario_id = ?";
@@ -60,6 +61,7 @@ $html = '
     <strong>Método de Pago:</strong> ' . htmlspecialchars($metodopago) . '<br>
     <strong>Domicilio:</strong> ' . htmlspecialchars($domicilio) . '<br>
     <strong>Valor Total:</strong> ' . htmlspecialchars($valortotal) . '<br>
+    <strong>Cambio:</strong> ' . htmlspecialchars($cambio) . '<br>
     <hr>
     <h2>Productos y Adiciones:</h2>
     <ul>

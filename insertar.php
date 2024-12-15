@@ -11,10 +11,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $metodopago = $_POST['metodopago'];
     $domicilio = $_POST['domicilio'];
     $valortotal = $_POST['valortotal'];
-
+    $cambio =$_POST['cambio'];
     // Insertar el cliente en la tabla 'clientes'
-    $sql_cliente = "INSERT INTO clientes (nombre, direccion, telefono, metodopago, domicilio, valortotal) 
-                    VALUES ('$nombre', '$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal')";
+    $sql_cliente = "INSERT INTO clientes (nombre, direccion, telefono, metodopago, domicilio, valortotal,cambio) 
+                    VALUES ('$nombre', '$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal','$cambio')";
 
     if ($conexion->query($sql_cliente) === TRUE) {
         // Obtener el último ID insertado del cliente

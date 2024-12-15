@@ -66,6 +66,7 @@ $result = $conexion->query($sql);
             <th>Acciones</th>
             <th>Acciones</th>
             <th>Acciones</th>
+            <th>Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -109,6 +110,7 @@ $result = $conexion->query($sql);
                 <td><?= $usuario['metodopago'] ?></td>
                 <td><?= $usuario['domicilio'] ?></td>
                 <td><?= $usuario['valortotal'] ?></td>
+                <td><?= $usuario['cambio'] ?></td>
                 <td>
                     <!-- Botón para editar usuario -->
                     <a href="editar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-primary">Editar</a>
@@ -194,6 +196,8 @@ $result = $conexion->query($sql);
                 <option value="Chocolate">Chocolate</option>
                 <option value="Chispas de chocolate">Chispas de chocolate</option>
                 <option value="Crema Chantilly">Crema Chantilly</option>
+                <option value="M&M">M&M</option>
+                <option value="Milo">Milo</option>
             </select>
         </div>
 
@@ -247,6 +251,11 @@ $result = $conexion->query($sql);
     <div class="form-group">
         <label for="direccion">Valor total producto:</label>
         <input type="text" class="form-control" id="domicilio" name="valortotal" placeholder="Ingrese el valor total " required>
+    </div>
+
+    <div class="form-group">
+        <label for="direccion">Cambio:</label>
+        <input type="text" class="form-control" id="cambio" name="cambio" placeholder="Ingrese el valor del cambio a devolver " required>
     </div>
 
     
