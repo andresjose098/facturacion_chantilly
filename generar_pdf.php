@@ -39,7 +39,7 @@ $result_productos = $stmt_productos->get_result();
 $pdf = new TCPDF();
 
 // Establecer los márgenes y otras configuraciones del PDF
-$pdf->SetMargins(5, 5, 5);
+$pdf->SetMargins(3, 3, 3);
 $pdf->SetCreator(PDF_CREATOR);
 $pdf->SetAuthor('Tu Tienda');
 $pdf->SetTitle('Registro de Cliente');
