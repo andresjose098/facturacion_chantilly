@@ -4,6 +4,7 @@ include('conexion.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Obtener los datos del formulario
     $nombre = $_POST['nombre'];
+    $barrio = $_POST['barrio'];
     $direccion = $_POST['direccion'];
     $telefono = $_POST['telefono'];
     $productos = isset($_POST['productos']) ? $_POST['productos'] : [];  // Asegurarse de que productos[] exista
@@ -13,8 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $valortotal = $_POST['valortotal'];
     $cambio =$_POST['cambio'];
     // Insertar el cliente en la tabla 'clientes'
-    $sql_cliente = "INSERT INTO clientes (nombre, direccion, telefono, metodopago, domicilio, valortotal,cambio) 
-                    VALUES ('$nombre', '$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal','$cambio')";
+    $sql_cliente = "INSERT INTO clientes (nombre,barrio, direccion, telefono, metodopago, domicilio, valortotal,cambio) 
+                    VALUES ('$nombre','$barrio','$direccion', '$telefono', '$metodopago', '$domicilio', '$valortotal','$cambio')";
 
     if ($conexion->query($sql_cliente) === TRUE) {
         // Obtener el último ID insertado del cliente

@@ -20,6 +20,7 @@ if (!$usuario) {
 
 // Obtener los datos del cliente
 $nombre = $usuario['nombre'];
+$barrio=$usuario['barrio'];
 $direccion = $usuario['direccion'];
 $telefono = $usuario['telefono'];
 $metodopago = $usuario['metodopago'];
@@ -54,8 +55,10 @@ $pdf->SetFont('helvetica', '', 12);
 // Crear contenido del PDF (HTML)
 $html = '
     <h2>Chantilly Pastelería Artesanal</h2>
+        whatsapp 3185212067
     <h1>Registro de Usuario</h1>
     <strong>Nombre:</strong> ' . htmlspecialchars($nombre) . '<br>
+    <strong>Barrio:</strong> ' . htmlspecialchars($barrio) . '<br>
     <strong>Dirección:</strong> ' . htmlspecialchars($direccion) . '<br>
     <strong>Teléfono:</strong> ' . htmlspecialchars($telefono) . '<br>
     <strong>Método de Pago:</strong> ' . htmlspecialchars($metodopago) . '<br>
@@ -95,7 +98,8 @@ $html .= '
     </ul>
     <hr>
     <p><strong>Gracias por confiar en nosotros!</strong></p>
-    <p>UrbanSoft empresa dedicada al desarrollo del software!</p>
+    <p>UrbanSoft empresa dedicada</p> 
+    <p>al desarrollo del software!</p>
     <p>Whatsapp 3165155249</p>
 ';
 

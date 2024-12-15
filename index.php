@@ -57,6 +57,7 @@ $result = $conexion->query($sql);
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Barrio</th>
             <th>Dirección</th>
             <th>Teléfono</th>
             <th>Productos y Adiciones</th>
@@ -74,6 +75,7 @@ $result = $conexion->query($sql);
             <tr>
                 <td><?= $usuario['id'] ?></td>
                 <td><?= $usuario['nombre'] ?></td>
+                <td><?= $usuario['barrio'] ?></td>
                 <td><?= $usuario['direccion'] ?></td>
                 <td><?= $usuario['telefono'] ?></td>
                 <td>
@@ -162,6 +164,10 @@ $result = $conexion->query($sql);
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
     </div>
     <div class="form-group">
+        <label for="barrio">Barrio:</label>
+        <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Ingrese el barrio" required>
+    </div>
+    <div class="form-group">
         <label for="direccion">Dirección:</label>
         <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección" required>
     </div>
@@ -182,14 +188,16 @@ $result = $conexion->query($sql);
                 <option value="Merengon Oreo">Merengon Oreo</option>
                 <option value="Merengon M&M">Merengon M&M</option>
                 <option value="Merengon Milo">Merengon Milo</option>
-                <option value="Merengon Fresas con crema">Merengon Fresas con crema</option>
+                <option value="Merengon Fresas con crema">Fresas con crema</option>
+                <option value="Merengon Fresas con crema">Porcion de torta</option>
             </select>
         </div>
 
         <!-- Contenedor de Adiciones -->
         <div class="adiciones" style="display: flex; gap: 10px; align-items: center;">
             <label>Adiciones:</label>
-            <select class="form-select" name="adiciones[0][]" required>
+            <select class="form-select" name="adiciones[0][]" >
+                 <option value=""></option>
                 <option value="Arequipe">Arequipe</option>
                 <option value="Lechera">Lechera</option>
                 <option value="Fresa">Fresa</option>
@@ -198,6 +206,7 @@ $result = $conexion->query($sql);
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>
                 <option value="Milo">Milo</option>
+              
             </select>
         </div>
 
@@ -233,6 +242,7 @@ $result = $conexion->query($sql);
     <div class="form-group">
         <label for="direccion">Domicilio:</label>
         <select class="form-select" id="sel1" name="domicilio">
+        <option></option>
         <option>$4.000</option>
         <option>$5.000</option>
         <option>$6.000</option>

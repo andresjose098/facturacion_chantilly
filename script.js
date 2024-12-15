@@ -22,12 +22,14 @@ function agregarProducto() {
                 <option value="Merengon Oreo">Merengon Oreo</option>
                 <option value="Merengon M&M">Merengon M&M</option>
                 <option value="Merengon Milo">Merengon Milo</option>
-                <option value="Merengon Fresas con crema">Merengon Fresas con crema</option>
+                <option value= Fresas con crema">Fresas con crema</option>
+                <option value="porciontorta">Porcion de torta</option>
             </select>
         </div>
         <div class="adiciones" style="display: flex; gap: 10px; align-items: center;">
             <label>Adiciones:</label>
-            <select class="form-select" name="adiciones[${index}][]" required>
+            <select class="form-select" name="adiciones[${index}][]" >
+                <option value=""></option>
                 <option value="Arequipe">Arequipe</option>
                 <option value="Lechera">Lechera</option>
                 <option value="Fresa">Fresa</option>
@@ -36,6 +38,7 @@ function agregarProducto() {
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>
                 <option value="Milo">Milo</option>
+                
             </select>
         </div>
         <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this)">Agregar Adición</button>
@@ -54,8 +57,9 @@ function agregarAdicion(btn) {
     const nuevaAdicion = document.createElement("select");
     nuevaAdicion.classList.add("form-select");
     nuevaAdicion.name = `adiciones[${index}][]`;
-    nuevaAdicion.required = true;
+    nuevaAdicion.required = false;
     nuevaAdicion.innerHTML = `
+        <option value=""></option>
         <option value="Arequipe">Arequipe</option>
         <option value="Lechera">Lechera</option>
         <option value="Fresa">Fresa</option>
@@ -98,10 +102,12 @@ function eliminarAdicion(btn) {
                                 // Rellenar los campos con los datos obtenidos
                                 $('#nombre').val(response.data.nombre);
                                 $('#direccion').val(response.data.direccion);
+                                $('#barrio').val(response.data.barrio);
                             } else {
                                 // Limpiar los campos si el usuario no es encontrado
                                 $('#nombre').val('');
                                 $('#direccion').val('');
+                                $('#barrio').val('');
                             }
                         },
                         error: function () {
@@ -112,6 +118,7 @@ function eliminarAdicion(btn) {
                     // Limpiar los campos si no se cumple la longitud mínima
                     $('#nombre').val('');
                     $('#direccion').val('');
+                    $('#barrio').val('');
                 }
             });
         });
