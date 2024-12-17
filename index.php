@@ -216,7 +216,8 @@ foreach ($productos as $producto) {
         <!-- Select de Productos -->
         <div>
             <label>Producto:</label>
-            <select class="form-select" name="productos[]" required>
+            <select class="form-select" name="productos[]" >
+                <option value=""></option>
                 <option value="Merengon mixto">Merengon mixto</option>
                 <option value="Merengon fresa">Merengon fresa</option>
                 <option value="Merengon Guanabana">Merengon Guanabana</option>
@@ -255,7 +256,7 @@ foreach ($productos as $producto) {
         <div class="adiciones" style="display: flex; gap: 10px; align-items: center;">
             <label>Adiciones:</label>
             <select class="form-select" name="adiciones[0][]" >
-                 <option value=""></option>
+                <option value=""></option>
                 <option value="Salsa de arequipe">Salsa de arequipe</option>
                 <option value="Salsa lechera">Salsa lechera</option>
                 <option value="Salsa de fresa ">Salsa de fresa</option>
@@ -264,6 +265,10 @@ foreach ($productos as $producto) {
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>
                 <option value="Milo">Milo</option>
+                <option value="fruta fresa">fruta fresa</option>
+                <option value="fruta durazno">fruta durazno</option>
+                <option value="fruta guanabana">fruta guanabana</option>
+                <option value="Galleta oreo">Galleta oreo</option>
               
             </select>
         </div>

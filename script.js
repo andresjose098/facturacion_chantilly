@@ -49,7 +49,7 @@ function agregarProducto() {
         <div class="adiciones" style="display: flex; gap: 10px; align-items: center;">
             <label>Adiciones:</label>
             <select class="form-select" name="adiciones[${index}][]" >
-                <option value=""></option>
+                 <option value=""></option>
                 <option value="Salsa de arequipe">Salsa de arequipe</option>
                 <option value="Salsa lechera">Salsa lechera</option>
                 <option value="Salsa de fresa ">Salsa de fresa</option>
@@ -58,6 +58,10 @@ function agregarProducto() {
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>
                 <option value="Milo">Milo</option>
+                <option value="fruta fresa">fruta fresa</option>
+                <option value="fruta durazno">fruta durazno</option>
+                <option value="fruta guanabana">fruta guanabana</option>
+                <option value="Galleta oreo">Galleta oreo</option>
                 
             </select>
         </div>
@@ -79,15 +83,20 @@ function agregarAdicion(btn) {
     nuevaAdicion.name = `adiciones[${index}][]`;
     nuevaAdicion.required = false;
     nuevaAdicion.innerHTML = `
-        <option value=""></option>
-        <option value="Salsa de arequipe">Salsa de arequipe</option>
-        <option value="Salsa lechera">Salsa lechera</option>
-        <option value="Salsa de fresa ">Salsa de fresa</option>
-        <option value="Salsa de chocolate ">Salsa de chocolate </option>
-        <option value="Chispas de chocolate">Chispas de chocolate</option>
-        <option value="Crema Chantilly">Crema Chantilly</option>
-        <option value="M&M">M&M</option>
-        <option value="Milo">Milo</option>
+         <option value=""></option>
+                <option value="Salsa de arequipe">Salsa de arequipe</option>
+                <option value="Salsa lechera">Salsa lechera</option>
+                <option value="Salsa de fresa ">Salsa de fresa</option>
+                <option value="Salsa de chocolate ">Salsa de chocolate </option>
+                <option value="Chispas de chocolate">Chispas de chocolate</option>
+                <option value="Crema Chantilly">Crema Chantilly</option>
+                <option value="M&M">M&M</option>
+                <option value="Milo">Milo</option>
+                <option value="fruta fresa">fruta fresa</option>
+                <option value="fruta durazno">fruta durazno</option>
+                <option value="fruta guanabana">fruta guanabana</option>
+                <option value="Galleta oreo">Galleta oreo</option>
+
     `;
     adicionesDiv.appendChild(nuevaAdicion);
 }
