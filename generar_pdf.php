@@ -97,13 +97,14 @@ $html = '
 ';
 
 // Agregar los productos y sus adiciones al contenido
+
 $contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
-    $html .= '<li style="text-align: left; margin-bottom: 10px;">
-                <strong>' . $contador . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
-                <ul style="list-style: none; padding-left: 20px; margin: 5px 0;">';
-    
-    // Consultar las adiciones asociadas al producto actual
+    $html .= '<li style="text-align: left; margin-bottom: 10px; list-style: none;">
+        <strong>' . $contador . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
+        <ul style="text-align: left; padding: 0; margin: 5px 0;">';
+
+    // Consultar adiciones
     $producto_id = $producto['id'];
     $sql_adiciones = "SELECT nombre_adicion FROM adiciones WHERE producto_id = ?";
     $stmt_adiciones = $conexion->prepare($sql_adiciones);
@@ -111,17 +112,17 @@ while ($producto = $result_productos->fetch_assoc()) {
     $stmt_adiciones->execute();
     $result_adiciones = $stmt_adiciones->get_result();
 
-    // Agregar las adiciones como sub-lista
+    // Mostrar las adiciones
     if ($result_adiciones->num_rows > 0) {
         while ($adicion = $result_adiciones->fetch_assoc()) {
-            $html .= '<li style="text-align: left; margin-left: 20px;">- ' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
+            $html .= '<li style="text-align: left; margin: 0; padding: 0;">- ' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
         }
     } else {
-        $html .= '<li style="text-align: left; margin-left: 20px;">- Ninguna</li>';
+        $html .= '<li style="text-align: left; margin: 0; padding: 0;">- Ninguna</li>';
     }
 
-    $html .= '</ul>
-              </li>';
+    $html .= '</ul></li>';
+    $contador++;
 }
 
 $html .= '
@@ -135,7 +136,10 @@ $html .= '
 ';
 
 // Escribir el HTML en el PDF
+$pdf->setCellPaddings(0, 0, 0, 0); // Sin relleno de celdas
+$pdf->setCellMargins(0, 0, 0, 0);  // Sin márgenes
+$pdf->setFontSubsetting(true); 
 $pdf->writeHTML($html);
-
+  
 // Generar el PDF y mostrarlo en el navegador
 $pdf->Output('registro_usuario_' . $id . '.pdf', 'I');  // 'I' indica que se abrirá en el navegador

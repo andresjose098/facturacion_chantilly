@@ -82,31 +82,69 @@ $result = $conexion->query($sql);
                     <?php
                     // Obtener los productos del usuario
                     $usuario_id = $usuario['id'];
-                    $sql_productos = "SELECT * FROM productos WHERE usuario_id = $usuario_id";
-                    $result_productos = $conexion->query($sql_productos);
+                  // Consulta para obtener productos y adiciones
+$sql_productos = "
+SELECT p.id AS producto_id, p.nombre_producto, a.nombre_adicion
+FROM productos p
+LEFT JOIN adiciones a ON p.id = a.producto_id
+WHERE p.usuario_id = ?
+ORDER BY p.id
+";
 
-                    // Mostrar los productos y sus adiciones
-                    while ($producto = $result_productos->fetch_assoc()) {
-                        echo "<strong>Producto:</strong> " . $producto['nombre_producto'] . "<br>";
+// Preparar y ejecutar la consulta
+// Preparar y ejecutar la consulta
+$stmt_productos = $conexion->prepare($sql_productos);
+if (!$stmt_productos) {
+    die("Error al preparar la consulta de productos: " . $conexion->error);
+}
 
-                        // Obtener las adiciones de cada producto
-                        $producto_id = $producto['id'];
-                        $sql_adiciones = "SELECT * FROM adiciones WHERE producto_id = $producto_id";
-                        $result_adiciones = $conexion->query($sql_adiciones);
+$stmt_productos->bind_param("i", $usuario_id);
+$stmt_productos->execute();
+$result_productos = $stmt_productos->get_result();
 
-                        // Mostrar las adiciones asociadas al producto
-                        if ($result_adiciones->num_rows > 0) {
-                            echo "<strong>Adiciones:</strong> ";
-                            $adiciones = [];
-                            while ($adicion = $result_adiciones->fetch_assoc()) {
-                                $adiciones[] = $adicion['nombre_adicion'];
-                            }
-                            echo implode(", ", $adiciones) . "<br>";
-                        } else {
-                            echo "<strong>Adiciones:</strong> Ninguna<br>";
-                        }
-                        echo "<hr>";
-                    }
+if (!$result_productos) {
+    die("Error en la consulta de productos y adiciones: " . $conexion->error);
+}
+
+// Inicializar array para almacenar productos y sus adiciones
+$productos = [];
+
+// Procesar resultados
+while ($row = $result_productos->fetch_assoc()) {
+    $producto_id = $row['producto_id'];
+
+    // Si el producto no existe en el array, inicializarlo
+    if (!isset($productos[$producto_id])) {
+        $productos[$producto_id] = [
+            'nombre_producto' => $row['nombre_producto'],
+            'adiciones' => [],
+        ];
+    }
+
+    // Agregar la adición si existe
+    if (!empty($row['nombre_adicion'])) {
+        $productos[$producto_id]['adiciones'][] = $row['nombre_adicion'];
+    }
+}
+
+// Mostrar los resultados
+foreach ($productos as $producto) {
+    echo "<strong>Producto:</strong> " . htmlspecialchars($producto['nombre_producto']) . "<br>";
+    echo "<strong>Adiciones:</strong> ";
+    if (!empty($producto['adiciones'])) {
+        echo htmlspecialchars(implode(", ", $producto['adiciones']));
+    } else {
+        echo "Ninguna";
+    }
+    echo "<br><hr>";
+}
+
+
+// Debugging: Para verificar los datos procesados
+// echo "<pre>";
+// print_r($productos);
+// echo "</pre>";
+
                     ?>
                 </td>
                 <td><?= $usuario['metodopago'] ?></td>
@@ -190,6 +228,26 @@ $result = $conexion->query($sql);
                 <option value="Merengon Milo">Merengon Milo</option>
                 <option value="Merengon Fresas con crema">Fresas con crema</option>
                 <option value="Porcion torta">Porcion de torta</option>
+                <option value="Genovesa de fresa y durazno 1/4 $62.000">Genovesa de fresa y durazno 1/4 $62.000</option>
+                <option value="Genovesa de fresa y durazno 1/2 $82.000">Genovesa de fresa y durazno 1/2 $82.000</option>
+                <option value="Genovesa de fresa 1/4 $62.000">Genovesa de fresa 1/4 $62.000 </option>
+                <option value="Genovesa de fresa 1/2 $82.000">Genovesa de fresa 1/2 $82.000</option>
+                <option value="Genovesa de durazno 1/4 $67.000">Genovesa de durazno 1/4 $67.000 </option>
+                <option value="Genovesa de durazno 1/2  $87.000">Genovesa de durazno 1/2  $87.000</option>
+                <option value="Genovesa de mora 1/4 $80.000">Genovesa de mora 1/4 $80.000</option>
+                <option value="Genovesa de Milo 1/4 $60.000">Genovesa de Milo 1/4 $60.000</option>
+                <option value="Genovesa de Milo 1/2 $80.000">Genovesa de Milo 1/2 $80.000</option>
+                <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000 </option>
+                <option value="Genovesa de oreo 1/2$80.000">Genovesa de oreo 1/2 $80.000 </option>
+                <option value="Genovesa de caramelo arequipe 1/4 $60.000">Genovesa de caramelo arequipe 1/4 $60.000 </option>
+                <option value="Genovesa de caramelo arequipe 1/2 $80.000">Genovesa de caramelo arequipe 1/2 $80.000</option>
+                <option value="Genovesa de maracuyá 1/4 $60.000">Genovesa de maracuyá 1/4 $60.000 </option>
+                <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000 </option>
+                <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
+                <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000 </option>
+                <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000 </option>
+                <option value="Rollo de fresa $80.000">Rollo de fresa $80.000 </option>
+
             </select>
         </div>
 
@@ -198,10 +256,10 @@ $result = $conexion->query($sql);
             <label>Adiciones:</label>
             <select class="form-select" name="adiciones[0][]" >
                  <option value=""></option>
-                <option value="Arequipe">Arequipe</option>
-                <option value="Lechera">Lechera</option>
-                <option value="Fresa">Fresa</option>
-                <option value="Chocolate">Chocolate</option>
+                <option value="Salsa de arequipe">Salsa de arequipe</option>
+                <option value="Salsa lechera">Salsa lechera</option>
+                <option value="Salsa de fresa ">Salsa de fresa</option>
+                <option value="Salsa de chocolate ">Salsa de chocolate </option>
                 <option value="Chispas de chocolate">Chispas de chocolate</option>
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>

@@ -22,18 +22,38 @@ function agregarProducto() {
                 <option value="Merengon Oreo">Merengon Oreo</option>
                 <option value="Merengon M&M">Merengon M&M</option>
                 <option value="Merengon Milo">Merengon Milo</option>
-                <option value= Fresas con crema">Fresas con crema</option>
-                <option value="porciontorta">Porcion de torta</option>
+                <option value="Merengon Fresas con crema">Fresas con crema</option>
+                <option value="Porcion torta">Porcion de torta</option>
+                <option value="Genovesa de fresa y durazno 1/4 $62.000">Genovesa de fresa y durazno 1/4 $62.000</option>
+                <option value="Genovesa de fresa y durazno 1/2 $82.000">Genovesa de fresa y durazno 1/2 $82.000</option>
+                <option value="Genovesa de fresa 1/4 $62.000">Genovesa de fresa 1/4 $62.000 </option>
+                <option value="Genovesa de fresa 1/2 $82.000">Genovesa de fresa 1/2 $82.000</option>
+                <option value="Genovesa de durazno 1/4 $67.000">Genovesa de durazno 1/4 $67.000 </option>
+                <option value="Genovesa de durazno 1/2  $87.000">Genovesa de durazno 1/2  $87.000</option>
+                <option value="Genovesa de mora 1/4 $80.000">Genovesa de mora 1/4 $80.000</option>
+                <option value="Genovesa de Milo 1/4 $60.000">Genovesa de Milo 1/4 $60.000</option>
+                <option value="Genovesa de Milo 1/2 $80.000">Genovesa de Milo 1/2 $80.000</option>
+                <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000 </option>
+                <option value="Genovesa de oreo 1/2$80.000">Genovesa de oreo 1/2 $80.000 </option>
+                <option value="Genovesa de caramelo arequipe 1/4 $60.000">Genovesa de caramelo arequipe 1/4 $60.000 </option>
+                <option value="Genovesa de caramelo arequipe 1/2 $80.000">Genovesa de caramelo arequipe 1/2 $80.000</option>
+                <option value="Genovesa de maracuyá 1/4 $60.000">Genovesa de maracuyá 1/4 $60.000 </option>
+                <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000 </option>
+                <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
+                <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000 </option>
+                <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000 </option>
+                <option value="Rollo de fresa $80.000">Rollo de fresa $80.000 </option>
+
             </select>
         </div>
         <div class="adiciones" style="display: flex; gap: 10px; align-items: center;">
             <label>Adiciones:</label>
             <select class="form-select" name="adiciones[${index}][]" >
                 <option value=""></option>
-                <option value="Arequipe">Arequipe</option>
-                <option value="Lechera">Lechera</option>
-                <option value="Fresa">Fresa</option>
-                <option value="Chocolate">Chocolate</option>
+                <option value="Salsa de arequipe">Salsa de arequipe</option>
+                <option value="Salsa lechera">Salsa lechera</option>
+                <option value="Salsa de fresa ">Salsa de fresa</option>
+                <option value="Salsa de chocolate ">Salsa de chocolate </option>
                 <option value="Chispas de chocolate">Chispas de chocolate</option>
                 <option value="Crema Chantilly">Crema Chantilly</option>
                 <option value="M&M">M&M</option>
@@ -60,10 +80,10 @@ function agregarAdicion(btn) {
     nuevaAdicion.required = false;
     nuevaAdicion.innerHTML = `
         <option value=""></option>
-        <option value="Arequipe">Arequipe</option>
-        <option value="Lechera">Lechera</option>
-        <option value="Fresa">Fresa</option>
-        <option value="Chocolate">Chocolate</option>
+        <option value="Salsa de arequipe">Salsa de arequipe</option>
+        <option value="Salsa lechera">Salsa lechera</option>
+        <option value="Salsa de fresa ">Salsa de fresa</option>
+        <option value="Salsa de chocolate ">Salsa de chocolate </option>
         <option value="Chispas de chocolate">Chispas de chocolate</option>
         <option value="Crema Chantilly">Crema Chantilly</option>
         <option value="M&M">M&M</option>
