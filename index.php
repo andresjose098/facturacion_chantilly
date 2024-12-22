@@ -338,17 +338,18 @@ foreach ($productos as $producto) {
 </body>
 
 <script>
-    function agregarProducto() {
+ function agregarProducto() {
     const contenedor = document.getElementById("productos");
     const index = document.querySelectorAll(".producto").length;
 
+    // Crear un nuevo div para el producto
     const nuevoProducto = document.createElement("div");
     nuevoProducto.classList.add("producto");
     nuevoProducto.innerHTML = `
         <div>
             <label>Producto:</label>
             <select name="productos[${index}]" class="form-select" required>
-        <option value="" disabled selected>Seleccione un producto</option>
+                 <option value="" disabled selected>Seleccione un producto</option>
         <option value="Merengon mixto">Merengon mixto</option>
         <option value="Merengon fresa">Merengon fresa</option>
         <option value="Merengon Guanabana">Merengon Guanabana</option>
@@ -379,14 +380,14 @@ foreach ($productos as $producto) {
         <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000</option>
         <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000</option>
         <option value="Rollo de fresa $80.000">Rollo de fresa $80.000</option>
-                <!-- Agrega más opciones de productos aquí -->
+                <!-- Agrega más opciones aquí -->
             </select>
         </div>
-        <div class="adiciones">
+        <div class="adiciones" id="adiciones_${index}">
             <label>Adiciones:</label>
             <select name="adiciones[${index}][]" class="form-select" required>
-                 <option value="" disabled selected>Seleccione una adición</option>
-             <option value="Salsa de arequipe">Salsa de arequipe</option>
+                <option value="" disabled selected>Seleccione una adición</option>
+                   <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
         <option value="Salsa de chocolate">Salsa de chocolate</option>
@@ -398,7 +399,7 @@ foreach ($productos as $producto) {
         <option value="fruta durazno">Fruta durazno</option>
         <option value="fruta guanabana">Fruta guanabana</option>
         <option value="Galleta oreo">Galleta oreo</option>
-                <!-- Agrega más opciones de adiciones aquí -->
+                <!-- Agrega más opciones aquí -->
             </select>
         </div>
         <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this, ${index})">Agregar Adición</button>
@@ -407,15 +408,24 @@ foreach ($productos as $producto) {
     contenedor.appendChild(nuevoProducto);
 }
 
+
 function agregarAdicion(btn, index) {
-    const adicionesDiv = btn.previousElementSibling;
+    // Seleccionar el contenedor de adiciones por su ID único
+    const adicionesDiv = document.getElementById(`adiciones_${index}`);
+    if (!adicionesDiv) {
+        console.error(`No se encontró el contenedor de adiciones para el índice ${index}`);
+        return;
+    }
+
+    // Crear un nuevo selector de adiciones
     const nuevaAdicion = document.createElement("select");
     nuevaAdicion.name = `adiciones[${index}][]`;
     nuevaAdicion.classList.add("form-select");
     nuevaAdicion.required = true;
     nuevaAdicion.innerHTML = `
-       <option value="" disabled selected>Seleccione una adición</option>
-         <option value="Salsa lechera">Salsa lechera</option>
+        <option value="" disabled selected>Seleccione una adición</option>
+           <option value="Salsa de arequipe">Salsa de arequipe</option>
+        <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
         <option value="Salsa de chocolate">Salsa de chocolate</option>
         <option value="Chispas de chocolate">Chispas de chocolate</option>
@@ -426,10 +436,12 @@ function agregarAdicion(btn, index) {
         <option value="fruta durazno">Fruta durazno</option>
         <option value="fruta guanabana">Fruta guanabana</option>
         <option value="Galleta oreo">Galleta oreo</option>
-        <!-- Agrega más opciones de adiciones aquí -->
+        <!-- Agrega más opciones aquí -->
     `;
     adicionesDiv.appendChild(nuevaAdicion);
 }
+
+
 
 
 function eliminarProducto(btn) {
