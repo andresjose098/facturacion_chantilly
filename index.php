@@ -218,36 +218,38 @@ foreach ($productos as $producto) {
     <label>Producto:</label>
     <select class="form-select" name="productos[${index}]" required>
         <option value="" disabled selected>Seleccione un producto</option>
-        <option value="Merengon mixto">Merengon mixto</option>
-        <option value="Merengon fresa">Merengon fresa</option>
-        <option value="Merengon Guanabana">Merengon Guanabana</option>
-        <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
-        <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
-        <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
-        <option value="Merengon Oreo">Merengon Oreo</option>
-        <option value="Merengon M&M">Merengon M&M</option>
-        <option value="Merengon Milo">Merengon Milo</option>
-        <option value="Merengon Fresas con crema">Fresas con crema</option>
-        <option value="Porcion torta">Porcion de torta</option>
-        <option value="Genovesa de fresa y durazno 1/4 $62.000">Genovesa de fresa y durazno 1/4 $62.000</option>
-        <option value="Genovesa de fresa y durazno 1/2 $82.000">Genovesa de fresa y durazno 1/2 $82.000</option>
-        <option value="Genovesa de fresa 1/4 $62.000">Genovesa de fresa 1/4 $62.000</option>
-        <option value="Genovesa de fresa 1/2 $82.000">Genovesa de fresa 1/2 $82.000</option>
-        <option value="Genovesa de durazno 1/4 $67.000">Genovesa de durazno 1/4 $67.000</option>
-        <option value="Genovesa de durazno 1/2 $87.000">Genovesa de durazno 1/2 $87.000</option>
-        <option value="Genovesa de mora 1/4 $80.000">Genovesa de mora 1/4 $80.000</option>
-        <option value="Genovesa de Milo 1/4 $60.000">Genovesa de Milo 1/4 $60.000</option>
-        <option value="Genovesa de Milo 1/2 $80.000">Genovesa de Milo 1/2 $80.000</option>
-        <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000</option>
-        <option value="Genovesa de oreo 1/2 $80.000">Genovesa de oreo 1/2 $80.000</option>
-        <option value="Genovesa de caramelo arequipe 1/4 $60.000">Genovesa de caramelo arequipe 1/4 $60.000</option>
-        <option value="Genovesa de caramelo arequipe 1/2 $80.000">Genovesa de caramelo arequipe 1/2 $80.000</option>
-        <option value="Genovesa de maracuyá 1/4 $60.000">Genovesa de maracuyá 1/4 $60.000</option>
-        <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000</option>
-        <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
-        <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000</option>
-        <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000</option>
-        <option value="Rollo de fresa $80.000">Rollo de fresa $80.000</option>
+        <option value=""></option>
+                <option value="Merengon mixto">Merengon mixto</option>
+                <option value="Merengon fresa">Merengon fresa</option>
+                <option value="Merengon Guanabana">Merengon Guanabana</option>
+                <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
+                <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
+                <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
+                <option value="Merengon Oreo">Merengon Oreo</option>
+                <option value="Merengon M&M">Merengon M&M</option>
+                <option value="Merengon Milo">Merengon Milo</option>
+                <option value="Merengon Fresas con crema">Fresas con crema</option>
+                <option value="Porcion torta">Porcion de torta</option>
+                <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
+                <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
+                <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
+                <option value="Genovesa fresa 1/2 $85.000">Genovesa fresa 1/2 $85.000</option>
+                <option value="Genovesa durazno 1/4 $68.000">Genovesa durazno 1/4 $68.000 </option>
+                <option value="Genovesa durazno 1/2  $88.000">Genovesa durazno 1/2  $88.000</option>
+                <option value="Genovesa mora 1/4 $80.000">Genovesa mora 1/4 $80.000</option>
+                <option value="Genovesa Milo 1/4 $60.000">Genovesa Milo 1/4 $60.000</option>
+                <option value="Genovesa Milo 1/2 $80.000">Genovesa Milo 1/2 $80.000</option>
+                <option value="Genovesa oreo 1/4 $60.000">Genovesa oreo 1/4 $60.000 </option>
+                <option value="Genovesa oreo 1/2$80.000">Genovesa oreo 1/2 $80.000 </option>
+                <option value="Genovesa caramelo areq 1/4 $60.000">Genovesa caramelo areq 1/4 $60.000 </option>
+                <option value="Genovesa caramelo areq 1/2 $80.000">Genovesa caramelo areq 1/2 $80.000</option>
+                <option value="Genovesa maracuyá 1/4 $60.000">Genovesa maracuyá 1/4 $60.000 </option>
+                <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000 </option>
+                <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
+                <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000 </option>
+                <option value="Rollo de fresa $80.000">Rollo de fresa $80.000 </option>
+
+            </select>
     </select>
 </div>
 
@@ -255,7 +257,9 @@ foreach ($productos as $producto) {
 <div class="adiciones" id="adiciones_${index}" style="margin-top: 10px;">
     <label>Adiciones:</label>
     <select class="form-select" name="adiciones[${index}][]" required>
+    
         <option value="" disabled selected>Seleccione una adición</option>
+        <option value=""></option>
         <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
@@ -350,43 +354,47 @@ foreach ($productos as $producto) {
             <label>Producto:</label>
             <select name="productos[${index}]" class="form-select" required>
                  <option value="" disabled selected>Seleccione un producto</option>
-        <option value="Merengon mixto">Merengon mixto</option>
-        <option value="Merengon fresa">Merengon fresa</option>
-        <option value="Merengon Guanabana">Merengon Guanabana</option>
-        <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
-        <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
-        <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
-        <option value="Merengon Oreo">Merengon Oreo</option>
-        <option value="Merengon M&M">Merengon M&M</option>
-        <option value="Merengon Milo">Merengon Milo</option>
-        <option value="Merengon Fresas con crema">Fresas con crema</option>
-        <option value="Porcion torta">Porcion de torta</option>
-        <option value="Genovesa de fresa y durazno 1/4 $62.000">Genovesa de fresa y durazno 1/4 $62.000</option>
-        <option value="Genovesa de fresa y durazno 1/2 $82.000">Genovesa de fresa y durazno 1/2 $82.000</option>
-        <option value="Genovesa de fresa 1/4 $62.000">Genovesa de fresa 1/4 $62.000</option>
-        <option value="Genovesa de fresa 1/2 $82.000">Genovesa de fresa 1/2 $82.000</option>
-        <option value="Genovesa de durazno 1/4 $67.000">Genovesa de durazno 1/4 $67.000</option>
-        <option value="Genovesa de durazno 1/2 $87.000">Genovesa de durazno 1/2 $87.000</option>
-        <option value="Genovesa de mora 1/4 $80.000">Genovesa de mora 1/4 $80.000</option>
-        <option value="Genovesa de Milo 1/4 $60.000">Genovesa de Milo 1/4 $60.000</option>
-        <option value="Genovesa de Milo 1/2 $80.000">Genovesa de Milo 1/2 $80.000</option>
-        <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000</option>
-        <option value="Genovesa de oreo 1/2 $80.000">Genovesa de oreo 1/2 $80.000</option>
-        <option value="Genovesa de caramelo arequipe 1/4 $60.000">Genovesa de caramelo arequipe 1/4 $60.000</option>
-        <option value="Genovesa de caramelo arequipe 1/2 $80.000">Genovesa de caramelo arequipe 1/2 $80.000</option>
-        <option value="Genovesa de maracuyá 1/4 $60.000">Genovesa de maracuyá 1/4 $60.000</option>
-        <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000</option>
-        <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
-        <option value="Genovesa de oreo 1/4 $60.000">Genovesa de oreo 1/4 $60.000</option>
-        <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000</option>
-        <option value="Rollo de fresa $80.000">Rollo de fresa $80.000</option>
+       <option value=""></option>
+                <option value="Merengon mixto">Merengon mixto</option>
+                <option value="Merengon fresa">Merengon fresa</option>
+                <option value="Merengon Guanabana">Merengon Guanabana</option>
+                <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
+                <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
+                <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
+                <option value="Merengon Oreo">Merengon Oreo</option>
+                <option value="Merengon M&M">Merengon M&M</option>
+                <option value="Merengon Milo">Merengon Milo</option>
+                <option value="Merengon Fresas con crema">Fresas con crema</option>
+                <option value="Porcion torta">Porcion de torta</option>
+                <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
+                <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
+                <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
+                <option value="Genovesa fresa 1/2 $85.000">Genovesa fresa 1/2 $85.000</option>
+                <option value="Genovesa durazno 1/4 $68.000">Genovesa durazno 1/4 $68.000 </option>
+                <option value="Genovesa durazno 1/2  $88.000">Genovesa durazno 1/2  $88.000</option>
+                <option value="Genovesa mora 1/4 $80.000">Genovesa mora 1/4 $80.000</option>
+                <option value="Genovesa Milo 1/4 $60.000">Genovesa Milo 1/4 $60.000</option>
+                <option value="Genovesa Milo 1/2 $80.000">Genovesa Milo 1/2 $80.000</option>
+                <option value="Genovesa oreo 1/4 $60.000">Genovesa oreo 1/4 $60.000 </option>
+                <option value="Genovesa oreo 1/2$80.000">Genovesa oreo 1/2 $80.000 </option>
+                <option value="Genovesa caramelo areq 1/4 $60.000">Genovesa caramelo areq 1/4 $60.000 </option>
+                <option value="Genovesa caramelo areq 1/2 $80.000">Genovesa caramelo areq 1/2 $80.000</option>
+                <option value="Genovesa maracuyá 1/4 $60.000">Genovesa maracuyá 1/4 $60.000 </option>
+                <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000 </option>
+                <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
+                <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000 </option>
+                <option value="Rollo de fresa $80.000">Rollo de fresa $80.000 </option>
+
+            </select>
                 <!-- Agrega más opciones aquí -->
             </select>
         </div>
         <div class="adiciones" id="adiciones_${index}">
             <label>Adiciones:</label>
             <select name="adiciones[${index}][]" class="form-select" required>
+             
                 <option value="" disabled selected>Seleccione una adición</option>
+                 <option value=""></option>
                    <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
@@ -424,6 +432,7 @@ function agregarAdicion(btn, index) {
     nuevaAdicion.required = true;
     nuevaAdicion.innerHTML = `
         <option value="" disabled selected>Seleccione una adición</option>
+         <option value=""></option>
            <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>

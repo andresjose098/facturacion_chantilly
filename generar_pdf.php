@@ -54,57 +54,55 @@ $pdf->SetFont('helvetica', '', 12);
 
 // Crear contenido del PDF (HTML)
 $html = '
-   <h2 style="text-align: left; margin: 0;">Chantilly Pastelería Artesanal</h2>
-   <p style="text-align: left; margin: 0;">Whatsapp 3185212067</p>
-   <h1 style="text-align: left; margin: 10px 0;">Registro de Usuario</h1>
-   <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; text-align: left;">
+    <h2 style="text-align: left; margin-left: 20px;">Chantilly Pastelería Artesanal</h2>
+    <p style="text-align: left; margin-left: 20px;">Whatsapp 3185212067</p>
+    <h1 style="text-align: left; margin-left: 20px;">Registro de Usuario</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-left: 20px;">
         <tr>
-            <td style="width: 20%; text-align: left; padding: 5px 0;"><strong>Nombre:</strong></td>
-            <td style="width: 100%; text-align: left; padding: 5px 0;">' . htmlspecialchars($nombre) . '</td>
+            <td style="width: 20%;"><strong>Nombre:</strong></td>
+            <td style="width: 60%;">' . htmlspecialchars($nombre) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Dirección:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($direccion) . '</td>
+            <td><strong>Dirección:</strong></td>
+            <td>' . htmlspecialchars($direccion) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Barrio:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($barrio) . '</td>
+            <td><strong>Barrio:</strong></td>
+            <td>' . htmlspecialchars($barrio) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Teléfono:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($telefono) . '</td>
+            <td><strong>Teléfono:</strong></td>
+            <td>' . htmlspecialchars($telefono) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Método de Pago:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($metodopago) . '</td>
+            <td><strong>Método de Pago:</strong></td>
+            <td>' . htmlspecialchars($metodopago) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Domicilio:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($domicilio) . '</td>
+            <td><strong>Domicilio:</strong></td>
+            <td>' . htmlspecialchars($domicilio) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Valor Total:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($valortotal) . '</td>
+            <td><strong>Valor Total:</strong></td>
+            <td>' . htmlspecialchars($valortotal) . '</td>
         </tr>
         <tr>
-            <td style="text-align: left; padding: 5px 0;"><strong>Paga:</strong></td>
-            <td style="text-align: left; padding: 5px 0;">' . htmlspecialchars($cambio) . '</td>
+            <td><strong>Paga:</strong></td>
+            <td>' . htmlspecialchars($cambio) . '</td>
         </tr>
-   </table>
-   <hr style="margin: 10px 0;">
-   <h2 style="text-align: left; margin: 10px 0;">Productos y Adiciones:</h2>
-   <ul style="list-style: none; padding-left: 0; text-align: left;">
+    </table>
+    <hr style="margin-left: 10px;">
+    <h2 style="text-align: left; margin-left: 10px;">Productos y Adiciones:</h2>
+    <ul style="text-align: left; list-style-type: none; padding-left: 10px; margin-left: 10px;">
 ';
-
-// Agregar los productos y sus adiciones al contenido
 
 $contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
-    $html .= '<li style="text-align: left; margin-bottom: 10px; list-style: none;">
-        <strong>' . $contador . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
-        <ul style="text-align: left; padding: 0; margin: 5px 0;">';
-
-    // Consultar adiciones
+    $html .= '<li style="margin-bottom: 10px;">
+                <strong>' . $contador. '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
+                <ul style="list-style-type: disc; padding-left: 20px; margin-left: 10px;">';
+    
+    // Consultar las adiciones asociadas al producto actual
     $producto_id = $producto['id'];
     $sql_adiciones = "SELECT nombre_adicion FROM adiciones WHERE producto_id = ?";
     $stmt_adiciones = $conexion->prepare($sql_adiciones);
@@ -112,34 +110,36 @@ while ($producto = $result_productos->fetch_assoc()) {
     $stmt_adiciones->execute();
     $result_adiciones = $stmt_adiciones->get_result();
 
-    // Mostrar las adiciones
+    // Agregar las adiciones como sub-lista
     if ($result_adiciones->num_rows > 0) {
         while ($adicion = $result_adiciones->fetch_assoc()) {
-            $html .= '<li style="text-align: left; margin: 0; padding: 0;">- ' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
+            $html .= '<li>' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
         }
     } else {
-        $html .= '<li style="text-align: left; margin: 0; padding: 0;">- Ninguna</li>';
+        $html .= '<li>Ninguna</li>';
     }
 
-    $html .= '</ul></li>';
+    $html .= '</ul>
+              </li>';
     $contador++;
 }
 
 $html .= '
-   </ul>
-   <hr style="margin: 10px 0;">
-   <p style="text-align: left; margin: 5px 0;"><strong>Gracias por confiar en nosotros!</strong></p>
-   <p style="text-align: left; margin: 5px 0;">UrbanSoft empresa dedicada</p> 
-   <p style="text-align: left; margin: 5px 0;">al desarrollo del software!</p>
-   <p style="text-align: left; margin: 5px 0;">Whatsapp 3165155249</p>
-   <strong style="text-align: left;">Feliz navidad</strong>
+  </ul>
+<hr style="margin-left: 10px;">
+<p style="margin-left: 10px;"><strong>¡Gracias por confiar en nosotros!</strong></p>
+<p style="margin-left: 10px;">UrbanSoft, empresa dedicada</p> 
+<p style="margin-left: 10px;">al desarrollo de software.</p>
+<p style="margin-left: 10px;">WhatsApp: 3165155249</p>
+<p style="margin-left: 10px;"><strong>¡Feliz Navidad!</strong></p>
+<p style="margin-left: 10px;">
+    <img src="images/campana.jpg" style="width: 200px;">
+</p>
+
 ';
 
 // Escribir el HTML en el PDF
-$pdf->setCellPaddings(0, 0, 0, 0); // Sin relleno de celdas
-$pdf->setCellMargins(0, 0, 0, 0);  // Sin márgenes
-$pdf->setFontSubsetting(true); 
 $pdf->writeHTML($html);
-  
+
 // Generar el PDF y mostrarlo en el navegador
 $pdf->Output('registro_usuario_' . $id . '.pdf', 'I');  // 'I' indica que se abrirá en el navegador
