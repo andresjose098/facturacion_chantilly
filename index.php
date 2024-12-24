@@ -269,9 +269,9 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
     </select>
 </div>
 
-<div>
+<div >
             <label>Cantidad:</label>
-            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required>
+            <input type="number" name="cantidad[${index}]" class="form-control small-input" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
         </div>
 <!-- Contenedor de Adiciones -->
 <div class="adiciones" id="adiciones_${index}" style="margin-top: 10px;">
@@ -414,7 +414,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 
           <div style="margin-bottom: 10px;">
             <label>Cantidad:</label>
-            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required>
+            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
         </div>
 
         <div class="adiciones" id="adiciones_${index}">

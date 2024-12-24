@@ -46,3 +46,10 @@ select {
 button {
     height: fit-content;
 }
+
+.small-input {
+    width: 80px; /* Ajusta el ancho del campo */
+    font-size: 12px; /* Ajusta el tamaño del texto */
+    padding: 4px; /* Ajusta el relleno interno */
+    height: auto; /* Ajusta la altura para que se adapte al contenido */
+}
