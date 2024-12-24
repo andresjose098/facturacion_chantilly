@@ -18,6 +18,10 @@ function agregarProducto() {
                 <!-- Agrega más opciones de productos aquí -->
             </select>
         </div>
+         <div>
+            <label>Cantidad:</label>
+            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required>
+        </div>
         <div class="adiciones">
             <label>Adiciones:</label>
             <select name="adiciones[${index}][]" class="form-select" required>

@@ -35,6 +35,8 @@ $stmt_productos->bind_param("i", $id);
 $stmt_productos->execute();
 $result_productos = $stmt_productos->get_result();
 
+
+$total_cantidad = 0; // Variable para acumular el total de cantidades
 // Crear un objeto TCPDF
 $pdf = new TCPDF();
 
@@ -102,6 +104,14 @@ while ($producto = $result_productos->fetch_assoc()) {
                 <strong>' . $contador. '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
                 <ul style="list-style-type: disc; padding-left: 20px; margin-left: 10px;">';
     
+      // Agregar la cantidad
+    $cantidad = (int)$producto['cantidad'];
+    $total_cantidad += $cantidad;
+
+    $html .= '<li><strong>Cantidad:</strong> ' . $cantidad . '</li>';
+
+
+
     // Consultar las adiciones asociadas al producto actual
     $producto_id = $producto['id'];
     $sql_adiciones = "SELECT nombre_adicion FROM adiciones WHERE producto_id = ?";
@@ -122,11 +132,16 @@ while ($producto = $result_productos->fetch_assoc()) {
     $html .= '</ul>
               </li>';
     $contador++;
+
+
 }
+
+
 
 $html .= '
   </ul>
 <hr style="margin-left: 10px;">
+<h3 style="margin-left: 10px;"><strong>Total de Cantidades:</strong> ' . $total_cantidad . '</h3>
 <p style="margin-left: 10px;"><strong>¡Gracias por confiar en nosotros!</strong></p>
 <p style="margin-left: 10px;">UrbanSoft, empresa dedicada</p> 
 <p style="margin-left: 10px;">al desarrollo de software.</p>

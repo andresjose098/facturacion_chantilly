@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $telefono = $_POST['telefono'];
     $productos = isset($_POST['productos']) ? $_POST['productos'] : [];
     $adiciones = isset($_POST['adiciones']) ? $_POST['adiciones'] : [];
+    $cantidades = isset($_POST['cantidad']) ? $_POST['cantidad'] : []; // Capturar las cantidades
     $metodopago = $_POST['metodopago'];
     $domicilio = $_POST['domicilio'];
     $valortotal = $_POST['valortotal'];
@@ -26,10 +27,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insertar productos y sus respectivas adiciones
         foreach ($productos as $index => $producto) {
+            $cantidad = isset($cantidades[$index]) ? $cantidades[$index] : 1; // Obtener cantidad o asignar valor predeterminado de 1
+
             // Insertar producto
-            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto) VALUES (?, ?)";
+            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto, cantidad) VALUES (?, ?, ?)";
             $stmt_producto = $conexion->prepare($sql_producto);
-            $stmt_producto->bind_param("is", $usuario_id, $producto);
+            $stmt_producto->bind_param("isi", $usuario_id, $producto, $cantidad);
             $stmt_producto->execute();
             $producto_id = $conexion->insert_id;
 

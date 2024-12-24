@@ -83,13 +83,15 @@ $result = $conexion->query($sql);
                     // Obtener los productos del usuario
                     $usuario_id = $usuario['id'];
                   // Consulta para obtener productos y adiciones
-$sql_productos = "
-SELECT p.id AS producto_id, p.nombre_producto, a.nombre_adicion
-FROM productos p
-LEFT JOIN adiciones a ON p.id = a.producto_id
-WHERE p.usuario_id = ?
-ORDER BY p.id
-";
+            $sql_productos = "
+                  SELECT p.id AS producto_id, p.nombre_producto, p.cantidad, a.nombre_adicion
+                  FROM productos p
+                  LEFT JOIN adiciones a ON p.id = a.producto_id
+                  WHERE p.usuario_id = ?
+                  ORDER BY p.id
+                ";
+                  
+
 
 // Preparar y ejecutar la consulta
 // Preparar y ejecutar la consulta
@@ -107,7 +109,10 @@ if (!$result_productos) {
 }
 
 // Inicializar array para almacenar productos y sus adiciones
+// Inicializar array para almacenar productos y sus adiciones
+// Inicializar array para almacenar productos y sus adiciones
 $productos = [];
+$total_cantidad = 0; // Variable para acumular la cantidad total
 
 // Procesar resultados
 while ($row = $result_productos->fetch_assoc()) {
@@ -117,8 +122,13 @@ while ($row = $result_productos->fetch_assoc()) {
     if (!isset($productos[$producto_id])) {
         $productos[$producto_id] = [
             'nombre_producto' => $row['nombre_producto'],
+            'cantidad' => $row['cantidad'], // Incluir la cantidad
             'adiciones' => [],
         ];
+
+        // Sumar la cantidad al total
+        $total_cantidad += (int)($row['cantidad'] ?? 0);
+
     }
 
     // Agregar la adición si existe
@@ -130,6 +140,7 @@ while ($row = $result_productos->fetch_assoc()) {
 // Mostrar los resultados
 foreach ($productos as $producto) {
     echo "<strong>Producto:</strong> " . htmlspecialchars($producto['nombre_producto']) . "<br>";
+    echo "<strong>Cantidad:</strong> " . htmlspecialchars($producto['cantidad']) . "<br>";
     echo "<strong>Adiciones:</strong> ";
     if (!empty($producto['adiciones'])) {
         echo htmlspecialchars(implode(", ", $producto['adiciones']));
@@ -138,6 +149,10 @@ foreach ($productos as $producto) {
     }
     echo "<br><hr>";
 }
+
+// Mostrar la cantidad total
+echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad) . "<br>";
+
 
 
 // Debugging: Para verificar los datos procesados
@@ -151,6 +166,7 @@ foreach ($productos as $producto) {
                 <td><?= $usuario['domicilio'] ?></td>
                 <td><?= $usuario['valortotal'] ?></td>
                 <td><?= $usuario['cambio'] ?></td>
+                
                 <td>
                     <!-- Botón para editar usuario -->
                     <a href="editar_usuario.php?id=<?= $usuario['id'] ?>" class="btn btn-primary">Editar</a>
@@ -253,13 +269,17 @@ foreach ($productos as $producto) {
     </select>
 </div>
 
+<div>
+            <label>Cantidad:</label>
+            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required>
+        </div>
 <!-- Contenedor de Adiciones -->
 <div class="adiciones" id="adiciones_${index}" style="margin-top: 10px;">
     <label>Adiciones:</label>
     <select class="form-select" name="adiciones[${index}][]" required>
     
         <option value="" disabled selected>Seleccione una adición</option>
-        <option value=""></option>
+        <option value="ninguna">ninguna</option>
         <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
@@ -388,13 +408,21 @@ foreach ($productos as $producto) {
             </select>
                 <!-- Agrega más opciones aquí -->
             </select>
+
+            
         </div>
+
+          <div style="margin-bottom: 10px;">
+            <label>Cantidad:</label>
+            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required>
+        </div>
+
         <div class="adiciones" id="adiciones_${index}">
             <label>Adiciones:</label>
             <select name="adiciones[${index}][]" class="form-select" required>
              
                 <option value="" disabled selected>Seleccione una adición</option>
-                 <option value=""></option>
+                 <option value="ninguna">ninguna</option>
                    <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
@@ -432,7 +460,7 @@ function agregarAdicion(btn, index) {
     nuevaAdicion.required = true;
     nuevaAdicion.innerHTML = `
         <option value="" disabled selected>Seleccione una adición</option>
-         <option value=""></option>
+         <option value="ninguna">ninguna</option>
            <option value="Salsa de arequipe">Salsa de arequipe</option>
         <option value="Salsa lechera">Salsa lechera</option>
         <option value="Salsa de fresa">Salsa de fresa</option>
