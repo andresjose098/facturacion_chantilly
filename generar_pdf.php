@@ -51,8 +51,10 @@ $pdf->SetKeywords('Cliente, PDF, Tienda');
 // Agregar una página al PDF
 $pdf->AddPage();
 
+
+
 // Configurar la fuente
-$pdf->SetFont('helvetica', '', 12);
+$pdf->SetFont('helvetica', '', 9);
 
 // Crear contenido del PDF (HTML)
 $html = '
@@ -100,15 +102,17 @@ $html = '
 
 $contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
+      // Agregar la cantidad
+      $cantidad = (int)$producto['cantidad'];
+      $total_cantidad += $cantidad;
+    $html .= '<li><strong>Cantidad:</strong> ' . $cantidad . '</li>';
     $html .= '<li style="margin-bottom: 10px;">
                 <strong>' . $contador. '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
                 <ul style="list-style-type: disc; padding-left: 20px; margin-left: 10px;">';
     
-      // Agregar la cantidad
-    $cantidad = (int)$producto['cantidad'];
-    $total_cantidad += $cantidad;
+   
 
-    $html .= '<li><strong>Cantidad:</strong> ' . $cantidad . '</li>';
+    
 
 
 
@@ -148,13 +152,15 @@ $html .= '
 <p style="margin-left: 10px;">WhatsApp: 3165155249</p>
 <p style="margin-left: 10px;"><strong>¡Feliz Navidad!</strong></p>
 <p style="margin-left: 10px;">
-    <img src="images/campana.jpg" style="width: 200px;">
+    <img src="images/campana.jpg" style="width: 100px;">
 </p>
+
 
 ';
 
 // Escribir el HTML en el PDF
 $pdf->writeHTML($html);
+
 
 // Generar el PDF y mostrarlo en el navegador
 $pdf->Output('registro_usuario_' . $id . '.pdf', 'I');  // 'I' indica que se abrirá en el navegador

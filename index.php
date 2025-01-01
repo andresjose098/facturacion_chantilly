@@ -346,9 +346,10 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
     </div>
     
     <div class="form-group">
-        <label for="direccion">Valor total producto:</label>
-        <input type="text" class="form-control" id="domicilio" name="valortotal" placeholder="Ingrese el valor total " required>
-    </div>
+    <label for="valortotal">Costo Total:</label>
+    <input type="text" class="form-control" id="valortotal" name="valortotal" placeholder="Costo total" readonly>
+</div>
+
 
     <div class="form-group">
         <label for="direccion">Paga:</label>
@@ -362,7 +363,179 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 </body>
 
 <script>
- function agregarProducto() {
+// Lista de precios por producto
+const preciosProductos = {
+    "Merengon mixto": 15000,
+    "Merengon fresa": 15000,
+    "Merengon Guanabana": 15000,
+    "Merengon fresa y durazno": 15000,
+    "Merengon fresa guanabana": 15000,
+    "Merengon Durazno guanabana": 15000,
+    "Merengon Oreo": 15000,
+    "Merengon M&M": 15000,
+    "Merengon Milo": 15000,
+    "Fresas con crema": 15000,
+    "Porcion torta": 8000,
+    "Genovesa fresa y dur 1/4 $65.000": 65000,
+    "Genovesa fresa y dur 1/2 $85.000": 85000,
+    "Genovesa de fresa 1/4 $62.000": 62000,
+    "Genovesa de fresa 1/2 $82.000": 82000,
+    "Genovesa de durazno 1/4 $67.000": 67000,
+    "Genovesa de durazno 1/2 $87.000": 87000,
+    "Genovesa de mora 1/4 $60.000": 60000,
+    "Genovesa de mora 1/2 $80.000": 80000,
+    "Genovesa de Milo 1/4 $60.000": 60000,
+    "Genovesa de Milo 1/2 $80.000": 80000,
+    "Genovesa de oreo 1/4 $60.000": 60000,
+    "Genovesa de oreo 1/2 $80.000": 80000,
+    "Genovesa de caramelo arequipe 1/4 $60.000": 60000,
+    "Genovesa de caramelo arequipe 1/2 $80.000": 80000,
+    "Genovesa de maracuyá 1/4 $60.000": 60000,
+    "Genovesa maracuyá 1/2 $80.000": 80000,
+    "Torta red velvet 1/4 $60.000": 60000,
+    "Torta red velvet 1/2 $80.000": 80000,
+    "Rollo de fresa $80.000": 80000,
+};
+
+// Lista de precios por adición
+const preciosAdiciones = {
+    "ninguna":0,
+    "Salsa de arequipe": 2000,
+    "Salsa lechera": 1500,
+    "Salsa de fresa": 1500,
+    "Salsa de chocolate": 2000,
+    "Chispas de chocolate": 2500,
+    "Crema Chantilly": 1000,
+    "M&M": 3000,
+    "Milo": 2500,
+    "fruta fresa": 2000,
+    "fruta durazno": 2500,
+    "fruta guanabana": 3000,
+    "Galleta oreo": 2000,
+};
+
+// Función para calcular el costo total
+function calcularCostoTotal() {
+    const productosDivs = document.querySelectorAll(".producto");
+    let totalProductos = 0;
+
+    productosDivs.forEach((productoDiv, index) => {
+        // Seleccionar elementos relevantes dentro de cada producto
+        const productoSelect = productoDiv.querySelector(`select[name="productos[${index}]"]`);
+        const cantidadInput = productoDiv.querySelector(`input[name="cantidad[${index}]"]`);
+        const adicionSelects = productoDiv.querySelectorAll(`select[name="adiciones[${index}][]"]`);
+
+        // Calcular precio del producto
+        const productoSeleccionado = productoSelect ? productoSelect.value : null;
+        const cantidad = cantidadInput ? parseInt(cantidadInput.value) || 1 : 1;
+        let precioProducto = preciosProductos[productoSeleccionado] || 0;
+        let precioTotalProducto = precioProducto * cantidad;
+
+        // Calcular costo de las adiciones (dos primeras gratuitas)
+        let costoAdiciones = 0;
+        adicionSelects.forEach((select, i) => {
+            if (select.value) {
+                if (i >= 2) { // Cobrar solo a partir de la tercera adición
+                    costoAdiciones += preciosAdiciones[select.value] || 0;
+                }
+            }
+        });
+
+        // Sumar adiciones al total del producto
+        precioTotalProducto += costoAdiciones;
+
+        // Acumular al total general
+        totalProductos += precioTotalProducto;
+    });
+
+    // Obtener costo del domicilio
+    const domicilioSelect = document.querySelector(`select[name="domicilio"]`);
+    let costoDomicilio = 0;
+
+    if (domicilioSelect && domicilioSelect.value) {
+        // Convertir el valor del domicilio a número entero eliminando caracteres no numéricos
+        costoDomicilio = parseInt(domicilioSelect.value.replace(/[$.]/g, "")) || 0;
+    }
+
+    // Calcular costo total (productos + domicilio)
+    const costoTotal = totalProductos + costoDomicilio;
+
+    // Mostrar el costo total en el campo correspondiente
+    const valorTotalInput = document.querySelector(`input[name="valortotal"]`);
+    if (valorTotalInput) {
+        valorTotalInput.value = costoTotal.toLocaleString("es-CO", { style: "currency", currency: "COP" });
+    }
+}
+
+// Vincular eventos para recalcular el total automáticamente
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".form-select, .form-control").forEach(element => {
+        element.addEventListener("change", calcularCostoTotal);
+    });
+
+    // Recalcular cuando se agregan productos
+    document.getElementById("productos").addEventListener("change", calcularCostoTotal);
+});
+
+
+
+function calcularPrecio(index) {
+    const productoSelect = document.querySelector(`select[name="productos[${index}]"]`);
+    const adicionSelects = document.querySelectorAll(`select[name="adiciones[${index}][]"]`);
+    const cantidadInput = document.querySelector(`input[name="cantidad[${index}]"]`);
+    const precioInput = document.getElementById(`precio_${index}`);
+
+    // Inicializar el precio con el valor del producto seleccionado
+    let precioProducto = 0;
+    if (productoSelect && productoSelect.value) {
+        precioProducto = preciosProductos[productoSelect.value] || 0;
+    }
+
+    // Obtener la cantidad seleccionada
+    const cantidad = parseInt(cantidadInput.value) || 1;
+
+    // Calcular el precio base por cantidad
+    let precioTotal = precioProducto * cantidad;
+
+    // Calcular el costo de las adiciones (las dos primeras son gratuitas)
+    let costoAdiciones = 0;
+    adicionSelects.forEach((select, i) => {
+        if (select.value) {
+            if (i >= 2) { // Cobrar solo a partir de la tercera adición
+                costoAdiciones += preciosAdiciones[select.value] || 0;
+            }
+        }
+    });
+
+    // Sumar el costo de las adiciones al precio total
+    precioTotal += costoAdiciones;
+
+    // Mostrar el precio calculado en el campo de precio
+    precioInput.value = precioTotal;
+}
+
+// Vincular eventos de cambio para productos y adiciones
+function agregarEventos(index) {
+    const productoSelect = document.querySelector(`select[name="productos[${index}]"]`);
+    const adicionSelects = document.querySelectorAll(`select[name="adiciones[${index}][]"]`);
+    const cantidadInput = document.querySelector(`input[name="cantidad[${index}]"]`);
+
+    // Recalcular precio cuando se selecciona un producto o cantidad
+    if (productoSelect) {
+        productoSelect.addEventListener("change", () => calcularPrecio(index));
+    }
+    if (cantidadInput) {
+        cantidadInput.addEventListener("change", () => calcularPrecio(index));
+    }
+
+    // Recalcular precio cuando se selecciona o cambia una adición
+    adicionSelects.forEach(select => {
+        select.addEventListener("change", () => calcularPrecio(index));
+    });
+}
+
+// Modificar agregarProducto para incluir eventos
+function agregarProducto() {
     const contenedor = document.getElementById("productos");
     const index = document.querySelectorAll(".producto").length;
 
@@ -373,80 +546,41 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
         <div>
             <label>Producto:</label>
             <select name="productos[${index}]" class="form-select" required>
-                 <option value="" disabled selected>Seleccione un producto</option>
-       <option value=""></option>
-                <option value="Merengon mixto">Merengon mixto</option>
-                <option value="Merengon fresa">Merengon fresa</option>
-                <option value="Merengon Guanabana">Merengon Guanabana</option>
-                <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
-                <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
-                <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
-                <option value="Merengon Oreo">Merengon Oreo</option>
-                <option value="Merengon M&M">Merengon M&M</option>
-                <option value="Merengon Milo">Merengon Milo</option>
-                <option value="Merengon Fresas con crema">Fresas con crema</option>
-                <option value="Porcion torta">Porcion de torta</option>
-                <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
-                <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
-                <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
-                <option value="Genovesa fresa 1/2 $85.000">Genovesa fresa 1/2 $85.000</option>
-                <option value="Genovesa durazno 1/4 $68.000">Genovesa durazno 1/4 $68.000 </option>
-                <option value="Genovesa durazno 1/2  $88.000">Genovesa durazno 1/2  $88.000</option>
-                <option value="Genovesa mora 1/4 $80.000">Genovesa mora 1/4 $80.000</option>
-                <option value="Genovesa Milo 1/4 $60.000">Genovesa Milo 1/4 $60.000</option>
-                <option value="Genovesa Milo 1/2 $80.000">Genovesa Milo 1/2 $80.000</option>
-                <option value="Genovesa oreo 1/4 $60.000">Genovesa oreo 1/4 $60.000 </option>
-                <option value="Genovesa oreo 1/2$80.000">Genovesa oreo 1/2 $80.000 </option>
-                <option value="Genovesa caramelo areq 1/4 $60.000">Genovesa caramelo areq 1/4 $60.000 </option>
-                <option value="Genovesa caramelo areq 1/2 $80.000">Genovesa caramelo areq 1/2 $80.000</option>
-                <option value="Genovesa maracuyá 1/4 $60.000">Genovesa maracuyá 1/4 $60.000 </option>
-                <option value="Genovesa maracuyá 1/2 $80.000">Genovesa maracuyá 1/2 $80.000 </option>
-                <option value="Torta red velvet 1/4 $60.000">Torta red velvet 1/4 $60.000</option>
-                <option value="Torta red velvet 1/2 $80.000">Torta red velvet 1/2 $80.000 </option>
-                <option value="Rollo de fresa $80.000">Rollo de fresa $80.000 </option>
-
+                <option value="" disabled selected>Seleccione un producto</option>
+                ${Object.keys(preciosProductos).map(producto => `<option value="${producto}">${producto}</option>`).join("")}
             </select>
-                <!-- Agrega más opciones aquí -->
-            </select>
-
-            
         </div>
 
-          <div style="margin-bottom: 10px;">
+        <div>
             <label>Cantidad:</label>
-            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
+            <input type="number" name="cantidad[${index}]" class="form-control" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;">
         </div>
 
         <div class="adiciones" id="adiciones_${index}">
             <label>Adiciones:</label>
             <select name="adiciones[${index}][]" class="form-select" required>
-             
                 <option value="" disabled selected>Seleccione una adición</option>
-                 <option value="ninguna">ninguna</option>
-                   <option value="Salsa de arequipe">Salsa de arequipe</option>
-        <option value="Salsa lechera">Salsa lechera</option>
-        <option value="Salsa de fresa">Salsa de fresa</option>
-        <option value="Salsa de chocolate">Salsa de chocolate</option>
-        <option value="Chispas de chocolate">Chispas de chocolate</option>
-        <option value="Crema Chantilly">Crema Chantilly</option>
-        <option value="M&M">M&M</option>
-        <option value="Milo">Milo</option>
-        <option value="fruta fresa">Fruta fresa</option>
-        <option value="fruta durazno">Fruta durazno</option>
-        <option value="fruta guanabana">Fruta guanabana</option>
-        <option value="Galleta oreo">Galleta oreo</option>
-                <!-- Agrega más opciones aquí -->
+                ${Object.keys(preciosAdiciones).map(adicion => `<option value="${adicion}">${adicion}</option>`).join("")}
             </select>
         </div>
+
+        <div>
+            <label>Precio:</label>
+            <input type="text" name="precios[${index}]" class="form-control" id="precio_${index}" readonly style="width: 100px; font-size: 17px; padding: 2px; height: auto;" value="0">
+        </div>
+
         <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this, ${index})">Agregar Adición</button>
         <button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Cancelar Producto</button>
     `;
+
     contenedor.appendChild(nuevoProducto);
+    agregarEventos(index);
 }
 
 
+
+
 function agregarAdicion(btn, index) {
-    // Seleccionar el contenedor de adiciones por su ID único
     const adicionesDiv = document.getElementById(`adiciones_${index}`);
     if (!adicionesDiv) {
         console.error(`No se encontró el contenedor de adiciones para el índice ${index}`);
@@ -460,23 +594,16 @@ function agregarAdicion(btn, index) {
     nuevaAdicion.required = true;
     nuevaAdicion.innerHTML = `
         <option value="" disabled selected>Seleccione una adición</option>
-         <option value="ninguna">ninguna</option>
-           <option value="Salsa de arequipe">Salsa de arequipe</option>
-        <option value="Salsa lechera">Salsa lechera</option>
-        <option value="Salsa de fresa">Salsa de fresa</option>
-        <option value="Salsa de chocolate">Salsa de chocolate</option>
-        <option value="Chispas de chocolate">Chispas de chocolate</option>
-        <option value="Crema Chantilly">Crema Chantilly</option>
-        <option value="M&M">M&M</option>
-        <option value="Milo">Milo</option>
-        <option value="fruta fresa">Fruta fresa</option>
-        <option value="fruta durazno">Fruta durazno</option>
-        <option value="fruta guanabana">Fruta guanabana</option>
-        <option value="Galleta oreo">Galleta oreo</option>
-        <!-- Agrega más opciones aquí -->
+        ${Object.keys(preciosAdiciones).map(adicion => `<option value="${adicion}">${adicion}</option>`).join("")}
     `;
+
+    // Agregar evento para recalcular precio al cambiar la nueva adición
+    nuevaAdicion.addEventListener("change", () => calcularPrecio(index));
+
+    // Añadir el nuevo selector al contenedor
     adicionesDiv.appendChild(nuevaAdicion);
 }
+
 
 
 
