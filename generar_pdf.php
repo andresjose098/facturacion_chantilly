@@ -150,10 +150,7 @@ $html .= '
 <p style="margin-left: 10px;">UrbanSoft, empresa dedicada</p> 
 <p style="margin-left: 10px;">al desarrollo de software.</p>
 <p style="margin-left: 10px;">WhatsApp: 3165155249</p>
-<p style="margin-left: 10px;"><strong>¡Feliz Navidad!</strong></p>
-<p style="margin-left: 10px;">
-    <img src="images/campana.jpg" style="width: 100px;">
-</p>
+
 
 
 ';

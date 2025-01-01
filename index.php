@@ -400,18 +400,18 @@ const preciosProductos = {
 // Lista de precios por adición
 const preciosAdiciones = {
     "ninguna":0,
-    "Salsa de arequipe": 2000,
-    "Salsa lechera": 1500,
-    "Salsa de fresa": 1500,
-    "Salsa de chocolate": 2000,
-    "Chispas de chocolate": 2500,
-    "Crema Chantilly": 1000,
-    "M&M": 3000,
-    "Milo": 2500,
-    "fruta fresa": 2000,
-    "fruta durazno": 2500,
+    "Salsa de arequipe": 1000,
+    "Salsa lechera": 1000,
+    "Salsa de fresa": 1000,
+    "Salsa de chocolate": 1000,
+    "Chispas de chocolate": 2000,
+    "Crema Chantilly": 3000,
+    "M&M": 4000,
+    "Milo": 3000,
+    "fruta fresa": 3000,
+    "fruta durazno": 4000,
     "fruta guanabana": 3000,
-    "Galleta oreo": 2000,
+    "Galleta oreo": 4000,
 };
 
 // Función para calcular el costo total
