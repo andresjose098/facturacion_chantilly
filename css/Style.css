@@ -1,0 +1,55 @@
+body{
+   color:#ffffff;
+   padding: 20px;
+}
+
+.button{
+    background-color: #D98880; /* Green */
+    border: 2px solid #D98880;
+    border-radius: 30px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.button:hover{
+    background-color: #e8948b;
+}
+
+.form-control{
+    width: 200´px;
+}
+
+.producto {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.adiciones {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+select {
+    width: 200px; /* Ajusta según tu diseño */
+}
+
+button {
+    height: fit-content;
+}
+
+.small-input {
+    width: 80px; /* Ajusta el ancho del campo */
+    font-size: 12px; /* Ajusta el tamaño del texto */
+    padding: 4px; /* Ajusta el relleno interno */
+    height: auto; /* Ajusta la altura para que se adapte al contenido */
+}
