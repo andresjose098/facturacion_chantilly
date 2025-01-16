@@ -20,6 +20,7 @@ if (!$usuario) {
 
 // Obtener los datos del cliente
 $nombre = $usuario['nombre'];
+$nit=$usuario['nit'];
 $barrio=$usuario['barrio'];
 $direccion = $usuario['direccion'];
 $telefono = $usuario['telefono'];
@@ -59,12 +60,17 @@ $pdf->SetFont('helvetica', '', 12);
 // Crear contenido del PDF (HTML)
 $html = '
     <h2 style="text-align: left; margin-left: 20px;">Chantilly Pastelería Artesanal</h2>
+     <p style="text-align: left; margin-left: 20px;">nit 1112486866-1</p>
     <p style="text-align: left; margin-left: 20px;">Whatsapp 3185212067</p>
     <h1 style="text-align: left; margin-left: 20px;">Registro de Usuario</h1>
     <table style="width: 100%; border-collapse: collapse; margin-left: 20px;">
         <tr>
             <td style="width: 20%;"><strong>Nombre:</strong></td>
             <td style="width: 60%;">' . htmlspecialchars($nombre) . '</td>
+        </tr>
+         <tr>
+            <td style="width: 20%;"><strong>NIT:</strong></td>
+            <td style="width: 60%;">' . htmlspecialchars($nit) . '</td>
         </tr>
         <tr>
             <td><strong>Dirección:</strong></td>

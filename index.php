@@ -57,6 +57,7 @@ $result = $conexion->query($sql);
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>NIT</th>
             <th>Barrio</th>
             <th>Dirección</th>
             <th>Teléfono</th>
@@ -75,6 +76,7 @@ $result = $conexion->query($sql);
             <tr>
                 <td><?= $usuario['id'] ?></td>
                 <td><?= $usuario['nombre'] ?></td>
+                <td><?= $usuario['nit'] ?></td>
                 <td><?= $usuario['barrio'] ?></td>
                 <td><?= $usuario['direccion'] ?></td>
                 <td><?= $usuario['telefono'] ?></td>
@@ -217,10 +219,18 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
         <label for="nombre">Nombre:</label>
         <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
     </div>
+    
+   
     <div class="form-group">
         <label for="barrio">Barrio:</label>
         <input type="text" class="form-control" id="barrio" name="barrio" placeholder="Ingrese el barrio" required>
     </div>
+
+    <div class="form-group">
+        <label for="nit">nit:</label>
+        <input type="text" class="form-control" id="barrio" name="nit" placeholder="Ingrese el nit">
+    </div>
+
     <div class="form-group">
         <label for="direccion">Dirección:</label>
         <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección" required>
@@ -274,7 +284,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
             <input type="number" name="cantidad[${index}]" class="form-control small-input" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
         </div>
 <!-- Contenedor de Adiciones -->
-<div class="adiciones" id="adiciones_${index}" style="margin-top: 10px;">
+<div class="adiciones" id="adiciones_0" style="margin-top: 10px;">
     <label>Adiciones:</label>
     <select class="form-select" name="adiciones[${index}][]" required>
     
@@ -298,7 +308,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 
 
         <!-- Botón para agregar más adiciones -->
-        <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this)">Agregar Adición</button>
+        <button type="button" class="btn btn-secondary" onclick="agregarAdicion(this,0)">Agregar Adición</button>
         <button type="button" class="btn btn-danger" onclick="eliminarProducto(this)">Cancelar Producto</button>
 
     </div>
@@ -582,6 +592,16 @@ function agregarProducto() {
 
 
 function agregarAdicion(btn, index) {
+    // Validar que el índice sea correcto
+    if (index === undefined || index === null) {
+        console.error("El índice no está definido. Asegúrate de pasar el índice al llamar a la función.");
+        return;
+    }
+
+    // Convertir index a número (por si llega como string)
+    index = parseInt(index, 10);
+
+    // Obtener el contenedor de adiciones
     const adicionesDiv = document.getElementById(`adiciones_${index}`);
     if (!adicionesDiv) {
         console.error(`No se encontró el contenedor de adiciones para el índice ${index}`);
@@ -593,17 +613,23 @@ function agregarAdicion(btn, index) {
     nuevaAdicion.name = `adiciones[${index}][]`;
     nuevaAdicion.classList.add("form-select");
     nuevaAdicion.required = true;
+
+    // Opciones del selector
     nuevaAdicion.innerHTML = `
         <option value="" disabled selected>Seleccione una adición</option>
         ${Object.keys(preciosAdiciones).map(adicion => `<option value="${adicion}">${adicion}</option>`).join("")}
     `;
 
-    // Agregar evento para recalcular precio al cambiar la nueva adición
+    // Agregar evento para recalcular precio
     nuevaAdicion.addEventListener("change", () => calcularPrecio(index));
 
-    // Añadir el nuevo selector al contenedor
+    // Agregar la nueva adición al contenedor
     adicionesDiv.appendChild(nuevaAdicion);
+
+    console.log(`Nueva adición añadida al producto con índice ${index}`);
 }
+
+
 
 
 
