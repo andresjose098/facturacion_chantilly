@@ -254,19 +254,19 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
                 <option value="Merengon Oreo">Merengon Oreo</option>
                 <option value="Merengon M&M">Merengon M&M</option>
                 <option value="Merengon Milo">Merengon Milo</option>
-                <option value="Merengon Fresas con crema">Fresas con crema</option>
+                <option value="Fresas con crema">Fresas con crema</option>
                 <option value="Porcion torta">Porcion de torta</option>
                 <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
                 <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
                 <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
                 <option value="Genovesa fresa 1/2 $85.000">Genovesa fresa 1/2 $85.000</option>
                 <option value="Genovesa durazno 1/4 $68.000">Genovesa durazno 1/4 $68.000 </option>
-                <option value="Genovesa durazno 1/2  $88.000">Genovesa durazno 1/2  $88.000</option>
+                <option value="Genovesa durazno 1/2 $88.000">Genovesa durazno 1/2  $88.000</option>
                 <option value="Genovesa mora 1/4 $80.000">Genovesa mora 1/4 $80.000</option>
                 <option value="Genovesa Milo 1/4 $60.000">Genovesa Milo 1/4 $60.000</option>
                 <option value="Genovesa Milo 1/2 $80.000">Genovesa Milo 1/2 $80.000</option>
                 <option value="Genovesa oreo 1/4 $60.000">Genovesa oreo 1/4 $60.000 </option>
-                <option value="Genovesa oreo 1/2$80.000">Genovesa oreo 1/2 $80.000 </option>
+                <option value="Genovesa oreo 1/2 $80.000">Genovesa oreo 1/2 $80.000 </option>
                 <option value="Genovesa caramelo areq 1/4 $60.000">Genovesa caramelo areq 1/4 $60.000 </option>
                 <option value="Genovesa caramelo areq 1/2 $80.000">Genovesa caramelo areq 1/2 $80.000</option>
                 <option value="Genovesa maracuyá 1/4 $60.000">Genovesa maracuyá 1/4 $60.000 </option>
@@ -389,19 +389,19 @@ const preciosProductos = {
     "Porcion torta": 12000,
     "Genovesa fresa y dur 1/4 $65.000": 65000,
     "Genovesa fresa y dur 1/2 $85.000": 85000,
-    "Genovesa de fresa 1/4 $65.000": 65000,
-    "Genovesa de fresa 1/2 $85.000": 85000,
-    "Genovesa de durazno 1/4 $68.000": 68000,
-    "Genovesa de durazno 1/2 $88.000": 88000,
-    "Genovesa de mora 1/4 $60.000": 60000,
-    "Genovesa de mora 1/2 $80.000": 80000,
-    "Genovesa de Milo 1/4 $60.000": 60000,
-    "Genovesa de Milo 1/2 $80.000": 80000,
-    "Genovesa de oreo 1/4 $60.000": 60000,
-    "Genovesa de oreo 1/2 $80.000": 80000,
-    "Genovesa de caramelo arequipe 1/4 $60.000": 60000,
-    "Genovesa de caramelo arequipe 1/2 $80.000": 80000,
-    "Genovesa de maracuyá 1/4 $60.000": 60000,
+    "Genovesa fresa 1/4 $65.000": 65000,
+    "Genovesa fresa 1/2 $85.000": 85000,
+    "Genovesa durazno 1/4 $68.000": 68000,
+    "Genovesa durazno 1/2 $88.000": 88000,
+    "Genovesa mora 1/4 $80.000": 80000,
+    "Genovesa mora 1/2 $80.000": 80000,
+    "Genovesa Milo 1/4 $60.000": 60000,
+    "Genovesa Milo 1/2 $80.000": 80000,
+    "Genovesa oreo 1/4 $60.000": 60000,
+    "Genovesa oreo 1/2 $80.000": 80000,
+    "Genovesa caramelo areq 1/4 $60.000": 60000,
+    "Genovesa caramelo areq 1/2 $80.000": 80000,
+    "Genovesa maracuyá 1/4 $60.000": 60000,
     "Genovesa maracuyá 1/2 $80.000": 80000,
     "Torta red velvet 1/4 $60.000": 60000,
     "Torta red velvet 1/2 $80.000": 80000,
