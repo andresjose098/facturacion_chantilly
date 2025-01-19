@@ -242,7 +242,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
         <!-- Select de Productos -->
         <div>
     <label>Producto:</label>
-    <select class="form-select" name="productos[${index}]" required>
+    <select class="form-select" name="productos[0]" required>
         <option value="" disabled selected>Seleccione un producto</option>
         <option value=""></option>
                 <option value="Merengon mixto">Merengon mixto</option>
@@ -281,12 +281,12 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 
 <div >
             <label>Cantidad:</label>
-            <input type="number" name="cantidad[${index}]" class="form-control small-input" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
+            <input type="number" name="cantidad[0]" class="form-control small-input" min="1" value="1" required style="width: 60px; font-size: 17px; padding: 2px; height: auto;" >
         </div>
 <!-- Contenedor de Adiciones -->
 <div class="adiciones" id="adiciones_0" style="margin-top: 10px;">
     <label>Adiciones:</label>
-    <select class="form-select" name="adiciones[${index}][]" required>
+    <select class="form-select" name="adiciones[0][]" required>
     
         <option value="" disabled selected>Seleccione una adición</option>
         <option value="ninguna">ninguna</option>
@@ -304,6 +304,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
         <option value="Galleta oreo">Galleta oreo</option>
     </select>
 </div>
+
 
 
 

@@ -40,22 +40,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $sql_adicion = "INSERT INTO adiciones (producto_id, nombre_adicion) VALUES (?, ?)";
         $stmt_adicion = $conexion->prepare($sql_adicion);
 
+
+      
         // Insertar productos y adiciones
         foreach ($productos as $index => $producto) {
             $cantidad = isset($cantidades[$index]) ? $cantidades[$index] : 1;
-            $stmt_producto->bind_param("isi", $usuario_id, $producto, $cantidad);
+            $precio = isset($_POST['precio'][$index]) ? $_POST['precio'][$index] : 0; // Capturar el precio
+        
+            // Insertar producto con precio
+            $sql_producto = "INSERT INTO productos (usuario_id, nombre_producto, cantidad, precio) VALUES (?, ?, ?, ?)";
+            $stmt_producto = $conexion->prepare($sql_producto);
+            $stmt_producto->bind_param("isid", $usuario_id, $producto, $cantidad, $precio);
             $stmt_producto->execute();
             $producto_id = $conexion->insert_id;
-
+        
+            // Insertar adiciones asociadas
             if (isset($adiciones[$index]) && is_array($adiciones[$index])) {
                 foreach ($adiciones[$index] as $adicion) {
+                    $sql_adicion = "INSERT INTO adiciones (producto_id, nombre_adicion) VALUES (?, ?)";
+                    $stmt_adicion = $conexion->prepare($sql_adicion);
                     $stmt_adicion->bind_param("is", $producto_id, $adicion);
                     $stmt_adicion->execute();
                 }
             }
         }
+        
 
         $conexion->commit();
+     //   echo('<pre>')   ; 
+
+//print_r($productos);
+//print_r($adiciones);
+//die();
+
         header("Location: index.php");
         exit();
     } catch (Exception $e) {
