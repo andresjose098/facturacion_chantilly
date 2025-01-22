@@ -256,6 +256,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
                 <option value="Merengon Milo $16.000o">Merengon Milo $16.000</option>
                 <option value="Fresas con crema $17.000">Fresas con crema $17.000</option>
                 <option value="Porcion de torta $13.000">Porcion de torta $13.000</option>
+                <option value="Porcion de torta red velvet $11.000">Porcion de torta red velvet $11.000</option>
                 <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
                 <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
                 <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
@@ -388,6 +389,7 @@ const preciosProductos = {
     "Merengon Milo $16.000": 16000,
     "Fresas con crema $17.000": 17000,
     "Porcion de torta $13.000": 13000,
+    "Porcion de torta red velvet $11.000": 11000,
     "Genovesa fresa y dur 1/4 $65.000": 65000,
     "Genovesa fresa y dur 1/2 $85.000": 85000,
     "Genovesa fresa 1/4 $65.000": 65000,
