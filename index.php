@@ -245,17 +245,17 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
     <select class="form-select" name="productos[0]" required>
         <option value="" disabled selected>Seleccione un producto</option>
         <option value=""></option>
-                <option value="Merengon mixto">Merengon mixto</option>
-                <option value="Merengon fresa">Merengon fresa</option>
-                <option value="Merengon Guanabana">Merengon Guanabana</option>
-                <option value="Merengon fresa y durazno">Merengon fresa y durazno</option>
-                <option value="Merengon fresa guanabana">Merengon fresa guanabana</option>
-                <option value="Merengon Durazno guanabana">Merengon Durazno guanabana</option>
-                <option value="Merengon Oreo">Merengon Oreo</option>
-                <option value="Merengon M&M">Merengon M&M</option>
-                <option value="Merengon Milo">Merengon Milo</option>
-                <option value="Fresas con crema">Fresas con crema</option>
-                <option value="Porcion torta">Porcion de torta</option>
+                <option value="Merengon mixto $15.000">Merengon mixto $15.000</option>
+                <option value="Merengon fresa $15.000">Merengon fresa $15.000</option>
+                <option value="Merengon Guanabana $15.000">Merengon Guanabana $15.000</option>
+                <option value="Merengon fresa y durazno $15.000">Merengon fresa y durazno $15.000</option>
+                <option value="Merengon fresa guanabana $15.000">Merengon fresa guanabana $15.000</option>
+                <option value="Merengon Durazno guanabana $15.000">Merengon Durazno guanabana $15.000</option>
+                <option value="Merengon Oreo $16.000">Merengon Oreo $16.000</option>
+                <option value="Merengon M&M $17.000">Merengon M&M $17.000</option>
+                <option value="Merengon Milo $16.000o">Merengon Milo $16.000</option>
+                <option value="Fresas con crema $17.000">Fresas con crema $17.000</option>
+                <option value="Porcion de torta $13.000">Porcion de torta $13.000</option>
                 <option value="Genovesa fresa y dur 1/4 $65.000">Genovesa fresa y dur 1/4 $65.000</option>
                 <option value="Genovesa fresa y dur 1/2 $85.000">Genovesa fresa y dur 1/2 $85.000</option>
                 <option value="Genovesa fresa 1/4 $65.000">Genovesa fresa 1/4 $65.000 </option>
@@ -362,10 +362,11 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 </div>
 
 
-    <div class="form-group">
-        <label for="direccion">Paga:</label>
-        <input type="text" class="form-control" id="cambio" name="cambio" placeholder="Ingrese el valor del pago " required>
-    </div>
+<div class="form-group">
+    <label for="direccion">Paga:</label>
+    <input type="text" class="form-control" id="cambio" name="cambio" placeholder="Ingrese el valor del pago" required oninput="formatearPesosColombianos(this)">
+</div>
+
 
     
     <button type="submit" class="btn btn-primary">Registrar</button>
@@ -376,17 +377,17 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 <script>
 // Lista de precios por producto
 const preciosProductos = {
-    "Merengon mixto": 15000,
-    "Merengon fresa": 15000,
-    "Merengon Guanabana": 15000,
-    "Merengon fresa y durazno": 15000,
-    "Merengon fresa guanabana": 15000,
-    "Merengon Durazno guanabana": 15000,
-    "Merengon Oreo": 16000,
-    "Merengon M&M": 17000,
-    "Merengon Milo": 16000,
-    "Fresas con crema": 16000,
-    "Porcion torta": 12000,
+    "Merengon mixto $15.000": 15000,
+    "Merengon fresa $15.000": 15000,
+    "Merengon Guanabana $15.000": 15000,
+    "Merengon fresa y durazno $15.000": 15000,
+    "Merengon fresa guanabana $15.000": 15000,
+    "Merengon Durazno guanabana $15.000": 15000,
+    "Merengon Oreo $16.000": 16000,
+    "Merengon M&M $17.000": 17000,
+    "Merengon Milo $16.000": 16000,
+    "Fresas con crema $17.000": 17000,
+    "Porcion de torta $13.000": 13000,
     "Genovesa fresa y dur 1/4 $65.000": 65000,
     "Genovesa fresa y dur 1/2 $85.000": 85000,
     "Genovesa fresa 1/4 $65.000": 65000,
@@ -424,6 +425,25 @@ const preciosAdiciones = {
     "fruta guanabana": 3000,
     "Galleta oreo": 4000,
 };
+
+function formatearPesosColombianos(input) {
+    // Obtener el valor del input
+    let valor = input.value;
+
+    // Eliminar cualquier carácter no numérico, pero mantener el punto decimal
+    valor = valor.replace(/[^0-9]/g, "");
+
+    // Formatear el número a formato de pesos colombianos (con separadores de miles)
+    if (valor.length > 0) {
+        // Asegurarse de que el número no tenga más de un punto decimal
+        valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+    }
+
+    // Asignar el valor formateado al input
+    input.value = valor;
+}
+
+
 
 // Función para calcular el costo total
 function calcularCostoTotal() {

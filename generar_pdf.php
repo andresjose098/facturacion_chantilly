@@ -57,6 +57,9 @@ $pdf->AddPage();
 // Configurar la fuente
 $pdf->SetFont('helvetica', '', 12);
 
+
+
+
 // Crear contenido del PDF (HTML)
 $html = '
     <h2 style="text-align: left; margin-left: 20px;">Chantilly Pastelería Artesanal</h2>
@@ -111,6 +114,17 @@ while ($producto = $result_productos->fetch_assoc()) {
       // Agregar la cantidad
       $cantidad = (int)$producto['cantidad'];
       $total_cantidad += $cantidad;
+    
+   $html .= '<style>
+    ul {
+        text-align: left; /* Asegura que el contenido de las listas esté alineado a la izquierda */
+        padding-left: 20px; /* Añade espacio a la izquierda de los elementos de la lista */
+    }
+    li {
+        margin-bottom: 5px; /* Espaciado entre elementos de la lista */
+        text-align: left; /* Asegura que cada elemento individual esté alineado a la izquierda */
+    }
+</style>';
     $html .= '<li><strong>Cantidad:</strong> ' . $cantidad . '</li>';
     $html .= '<li style="margin-bottom: 10px;">
                 <strong>' . $contador. '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
