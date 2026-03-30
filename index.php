@@ -189,7 +189,8 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 </table>
 <!-- Navegación de Paginación -->
 <div style="margin-top: 20px;">
-    <ul style="list-style: none; display: flex; gap: 10px; justify-content: center;">
+    <ul style="list-style: none; display: flex; gap: 0px; justify-content: center;">
+
         <?php if ($page > 1): ?>
             <li><a href="?page=<?= $page - 1 ?>" class="btn btn-secondary">Anterior</a></li>
         <?php endif; ?>
@@ -205,6 +206,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
         <?php if ($page < $totalPaginas): ?>
             <li><a href="?page=<?= $page + 1 ?>" class="btn btn-secondary">Siguiente</a></li>
         <?php endif; ?>
+
     </ul>
 </div>
 
@@ -253,7 +255,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
                 <option value="Merengon Durazno guanabana $15.000">Merengon Durazno guanabana $15.000</option>
                 <option value="Merengon Oreo $16.000">Merengon Oreo $16.000</option>
                 <option value="Merengon M&M $17.000">Merengon M&M $17.000</option>
-                <option value="Merengon Milo $16.000o">Merengon Milo $16.000</option>
+                <option value="Merengon Milo $16.000">Merengon Milo $16.000</option>
                 <option value="Fresas con crema $17.000">Fresas con crema $17.000</option>
                 <option value="Porcion de torta $13.000">Porcion de torta $13.000</option>
                 <option value="Porcion de torta red velvet $11.000">Porcion de torta red velvet $11.000</option>

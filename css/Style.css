@@ -53,3 +53,6 @@ button {
     padding: 4px; /* Ajusta el relleno interno */
     height: auto; /* Ajusta la altura para que se adapte al contenido */
 }
+
+ul { padding-left: 0; margin-left: 0; }
+li { margin-left: 0; }
