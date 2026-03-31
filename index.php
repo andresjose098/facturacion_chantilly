@@ -189,7 +189,7 @@ echo "<strong>Total de Cantidades:</strong> " . htmlspecialchars($total_cantidad
 </table>
 <!-- Navegación de Paginación -->
 <div style="margin-top: 20px;">
-    <ul style="list-style: none; display: flex; gap: 0px; justify-content: center;">
+    <ul style="list-style: none; display: flex; flex-wrap: wrap; gap: 5px; justify-content: center; padding: 0; margin: 0; width: auto;">
 
         <?php if ($page > 1): ?>
             <li><a href="?page=<?= $page - 1 ?>" class="btn btn-secondary">Anterior</a></li>

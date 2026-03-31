@@ -43,14 +43,16 @@ $pdf->SetSubject('Datos de Cliente');
 $pdf->SetKeywords('Cliente, PDF, Tienda');
 
 $pdf->AddPage();  // Agregar una página al PDF
-$pdf->SetFont('helvetica', '', 12);  // Configurar la fuente
+$pdf->SetFont('helvetica', '', 9);
+$pdf->setListIndentWidth(0);
 
-$html = '
-    <h2 style="text-align: left; margin-left: 20px;">Chantilly Pastelería Artesanal</h2>
-    <p style="text-align: left; margin-left: 20px;">nit 1112486866-1</p>
-    <p style="text-align: left; margin-left: 20px;">Whatsapp 3185212067</p>
-    <h1 style="text-align: left; margin-left: 20px;">Registro de Usuario</h1>
-    <table style="width: 100%; border-collapse: collapse; margin-left: 20px;">
+// Sección cabecera con interlineado normal
+$html_cabecera = '
+    <h2 style="text-align: left; margin-left: 20px; font-size: 12px; margin-bottom: 2px;">Chantilly Pastelería Artesanal</h2>
+    <p style="text-align: left; margin-left: 20px; font-size: 8px; margin: 0; padding: 0;">nit 1112486866-1</p>
+    <p style="text-align: left; margin-left: 20px; font-size: 8px; margin: 0; padding: 0;">Whatsapp 3185212067</p>
+    <h1 style="text-align: left; margin-left: 20px; font-size: 13px; margin-top: 4px; margin-bottom: 2px;">Registro de Usuario</h1>
+    <table style="width: 100%; border-collapse: collapse; margin-left: 20px; font-size: 9px;" cellpadding="1">
         <tr>
             <td style="width: 20%;"><strong>Nombre:</strong></td>
             <td style="width: 60%;">' . htmlspecialchars($nombre) . '</td>
@@ -88,20 +90,26 @@ $html = '
             <td>' . htmlspecialchars($cambio) . '</td>
         </tr>
     </table>
-    <hr style="margin-left: 10px;">
-    <h2 style="text-align: left; margin-left: 10px;">Productos y Adiciones:</h2>
-    <ul style="text-align: left; list-style-type: none; padding-left: 0px; margin-left: 0px;">
+    <hr style="margin: 2px 0;">
+    <h2 style="text-align: left; margin-left: 0px; font-size: 10px; margin-bottom: 2px;">Productos y Adiciones:</h2>
 ';
+
+$pdf->writeHTML($html_cabecera, true, false, true, false, '');
+
+// Sección de productos con interlineado reducido
+$pdf->setCellHeightRatio(1.2);
+$pdf->SetFont('helvetica', '', 8);
+
+$html = '<table cellpadding="0" cellspacing="0" border="0" style="font-size: 8px;">';
 
 $contador = 1;
 while ($producto = $result_productos->fetch_assoc()) {
     $cantidad = (int)$producto['cantidad'];
     $total_cantidad += $cantidad;
 
-    $html .= '<li style="margin-left:0px;"><strong>Cantidad:</strong> ' . $cantidad . '</li>';
-    $html .= '<li style="margin-left:0px; text-align:left;">
-                <strong>' . $contador . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '
-                <ul style="list-style-type: disc;margin-left: 0px;">';
+    $html .= '<tr><td><strong>Cantidad:</strong> ' . $cantidad . '</td></tr>';
+    $html .= '<tr><td><strong>' . $contador . '. Producto:</strong> ' . htmlspecialchars($producto['nombre_producto']) . '</td></tr>';
+    $html .= '<tr><td><strong>Adiciones:</strong> ';
 
     $producto_id = $producto['id'];
     $sql_adiciones = "SELECT nombre_adicion FROM adiciones WHERE producto_id = ?";
@@ -111,22 +119,29 @@ while ($producto = $result_productos->fetch_assoc()) {
     $result_adiciones = $stmt_adiciones->get_result();
 
     if ($result_adiciones->num_rows > 0) {
+        $adiciones = [];
         while ($adicion = $result_adiciones->fetch_assoc()) {
-            $html .= '<li style="text-align: left;">' . htmlspecialchars($adicion['nombre_adicion']) . '</li>';
+            $adiciones[] = htmlspecialchars($adicion['nombre_adicion']);
         }
+        $html .= implode(", ", $adiciones);
     } else {
-        $html .= '<li style="margin-left:10px;">Ninguna</li>';
+        $html .= 'Ninguna';
     }
 
-    $html .= '</ul></li>';
+    $html .= '</td></tr>';
+    $html .= '<tr><td style="border-bottom: 1px solid #ccc; font-size: 1px;">&nbsp;</td></tr>';
     $contador++;
-  
-    
 }
 
-$html .= '
-  </ul>
-<hr style="margin-left: 0px;">
+$html .= '</table>';
+
+$pdf->writeHTML($html, true, false, true, false, '');
+
+// Restaurar interlineado normal para el pie
+$pdf->setCellHeightRatio(1.25);
+
+$html_pie = '
+<hr style="margin: 2px 0;">
 <h3 style="margin-left: 0px;"><strong>Total de Cantidades:</strong> ' . $total_cantidad . '</h3>
 <p style="margin-left: 0px;"><strong>¡Gracias por confiar en nosotros!</strong></p>
 <p style="margin-left: 0px;">UrbanSoft, empresa dedicada</p>
@@ -134,7 +149,7 @@ $html .= '
 <p style="margin-left: 0px;">WhatsApp: 3165155249</p>
 ';
 
-$pdf->writeHTML($html);  // Escribir el HTML en el PDF
+$pdf->writeHTML($html_pie);
 $pdf->Output('registro_usuario_' . $id . '.pdf', 'I');  // 'I' indica que se abrirá en el navegador
 
 
